@@ -11,10 +11,46 @@
             background-color: #fff;
             text-align: center;
         }
-        .full-image {
-            width: 100%;
+        header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 20px;
+            color: #2d4b42;
+            display: flex;
+            align-items: center;
+        }
+        header h1::before {
+            content: "✝";
+            margin-right: 8px;
+        }
+        .btn-cafe {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 2px solid #2d4b42;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #2d4b42;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-cafe:hover {
+            background-color: #2d4b42;
+            color: #fff;
+        }
+        .main-image {
+            width: 85%;
+            max-width: 1200px;
             height: auto;
+            margin: 20px auto;
             display: block;
+            border-radius: 8px;
         }
         footer {
             padding: 20px;
@@ -22,37 +58,33 @@
             font-size: 14px;
             line-height: 1.6;
         }
-        .btn-cafe {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: 2px solid #2d4b42;
-            border-radius: 25px;
-            text-decoration: none;
+        footer a {
             color: #2d4b42;
-            font-weight: bold;
+            text-decoration: none;
         }
-        .btn-cafe:hover {
-            background-color: #2d4b42;
-            color: #fff;
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+
+    <!-- 상단 로고 & 다음카페 버튼 -->
+    <header>
+        <h1>매탄동성당</h1>
+        <a href="https://cafe.daum.net/maetan-parish" target="_blank" class="btn-cafe">다음카페</a>
+    </header>
+
     <!-- 메인 이미지 -->
-    <img src="maetan.jpg" alt="매탄동성당 메인 페이지 이미지" class="full-image">
+    <img src="maetan.jpg" alt="매탄동성당 메인 이미지" class="main-image">
 
     <!-- 하단 정보 -->
     <footer>
-        <div>
-            경기도 수원시 영통구 인계로284번길 15 (매탄동 808)<br>
-            <a href="https://maps.google.com/?q=매탄동성당" target="_blank">구글 지도 열기</a> |
-            사무실 <a href="tel:0312160573">031-216-0573</a>
-        </div>
-        <a href="https://cafe.daum.net/maetan-parish" target="_blank" class="btn-cafe">다음카페</a>
-        <div style="margin-top:10px;">
-            © 2025 Maetan-dong Catholic Parish
-        </div>
+        경기도 수원시 영통구 인계로284번길 15 (매탄동 808)<br>
+        <a href="https://maps.google.com/?q=매탄동성당" target="_blank">구글 지도 열기</a> |
+        사무실 <a href="tel:0312160573">031-216-0573</a><br>
+        © 2025 Maetan-dong Catholic Parish
     </footer>
+
 </body>
 </html>
