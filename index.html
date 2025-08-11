@@ -1,162 +1,187 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>매탄동성당 Maetan-dong Catholic Church</title>
-  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>매탄동성당 | Maetan-dong Catholic Parish</title>
+
+  <!-- 폰트: G마켓 산스 (Bold/Medium/Light) -->
+  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'GmarketSans', sans-serif;
-      background-color: #f9f6f0;
-      color: #333;
+    :root{
+      /* 톤: 웜 아이보리 / 그린 */
+      --bg:#faf9f4;
+      --ink:#222;             /* 본문색 */
+      --muted:#6b7280;        /* 보조색 */
+      --green:#1c3f39;        /* 메인 */
+      --gold:#c9ac78;         /* 포인트 */
+      --card:#fff;
+      --radius:14px;
+      --shadow:0 8px 24px rgba(0,0,0,.06);
+      /* 타이포 스케일(모바일 기본) */
+      --fs-body:16px;
+      --fs-h1:28px;
+      --fs-h2:22px;
+      --fs-h3:18px;
+      --lh:1.75;
+      --maxw:760px;           /* PC에서도 모바일 폭 유지 */
     }
-    header {
-      background: url('assets/interior1.jpg') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-      position: relative;
+    @media (min-width:768px){
+      :root{ --fs-body:17px; --fs-h1:32px; --fs-h2:24px; --fs-h3:19px; }
     }
-    header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
+    @media (min-width:1200px){
+      :root{ --fs-body:18px; --fs-h1:34px; --fs-h2:26px; --fs-h3:20px; }
     }
-    header h1 {
-      position: relative;
-      font-weight: 700; /* Bold */
-      font-size: 2.8em;
-      margin: 0;
-      z-index: 1;
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'GmarketSans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{font-size:var(--fs-body); line-height:var(--lh);}
+
+    /* 상단 네비 (간결) */
+    .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    .topnav{display:flex;justify-content:space-between;align-items:center;height:56px}
+    .brand{display:flex;gap:10px;align-items:center;color:var(--green);font-weight:700}
+    .brand .logo{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff}
+
+    /* 히어로: 십자가상 사진 + 오버레이 */
+    .hero{
+      position:relative; color:#fff;
+      background:
+        linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.55)),
+        url('assets/interior1.jpg') center 35%/cover no-repeat;
     }
-    header p {
-      position: relative;
-      font-weight: 300; /* Light */
-      font-size: 1.2em;
-      z-index: 1;
-    }
-    nav {
-      background-color: #2d4b3a;
-      display: flex;
-      justify-content: center;
-      padding: 10px;
-    }
-    nav a {
-      color: #f9f6f0;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 400; /* Regular */
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    section {
-      margin-bottom: 40px;
-    }
-    section h2 {
-      font-weight: 700; /* Bold */
-      font-size: 1.8em;
-      margin-bottom: 10px;
-    }
-    section p {
-      font-weight: 400; /* Regular */
-      line-height: 1.6;
-    }
-    .images {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .images img {
-      width: 100%;
-      max-width: 480px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    footer {
-      background-color: #2d4b3a;
-      color: #f9f6f0;
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-    }
-    footer a {
-      color: #f9f6f0;
-    }
+    .hero .inner{padding:72px 0}
+    h1{margin:0 0 6px;font-weight:700;font-size:var(--fs-h1);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+    .subtitle{margin:8px 0 18px;font-weight:300}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 16px;border-radius:999px;font-weight:700;text-decoration:none}
+    .btn-primary{background:var(--gold);color:#111}
+    .btn-outline{border:2px solid var(--gold);color:#fef8e7}
+
+    /* 공통 섹션 */
+    section{padding:36px 0}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+    h2{margin:0 0 12px;color:var(--green);font-size:var(--fs-h2);font-weight:700}
+    h3{margin:0 0 8px;color:var(--green);font-size:var(--fs-h3);font-weight:700}
+    .muted{color:var(--muted)}
+
+    /* 1열 정보 목록(라벨 위, 값 아래) — PC/모바일 동일 */
+    .kv{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+    .kv li{background:#fff;border:1px solid #eef2f7;border-radius:12px;padding:12px 14px}
+    .kv .k{display:inline-block;background:#e7efe9;color:var(--green);font-weight:700;border-radius:8px;padding:4px 10px;margin-bottom:6px}
+    .kv .v{display:block}
+
+    /* 갤러리(항상 1~2칸) */
+    .gallery{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (min-width:560px){ .gallery{grid-template-columns:repeat(2,1fr)} }
+    .gallery img{width:100%;height:260px;object-fit:cover;border-radius:12px}
+
+    /* 푸터 */
+    footer{background:#102a25;color:#cbd5e1;padding:28px 0;margin-top:8px}
+    footer a{color:#e5e7eb;text-decoration:none}
   </style>
 </head>
 <body>
-  <header>
-    <h1>매탄동성당</h1>
-    <p>Maetan-dong Catholic Church</p>
+
+  <!-- TOP -->
+  <div class="topbar">
+    <div class="wrap topnav">
+      <div class="brand"><div class="logo">✝</div>매탄동성당</div>
+      <a class="btn" style="color:var(--green);font-weight:700" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">다음카페</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap inner">
+      <h1>십자가의 사랑 안에서 함께 걷는 25주년</h1>
+      <p class="subtitle">천주교 수원교구 · 주보성인: 아기 예수의 성녀 데레사</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#about">본당 소개 보기</a>
+        <a class="btn btn-outline" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">다음카페 바로가기</a>
+      </div>
+    </div>
   </header>
-  <nav>
-    <a href="#about">본당 소개</a>
-    <a href="https://cafe.daum.net/maetancathoric" target="_blank">다음카페</a>
-    <a href="#history">연혁</a>
-    <a href="#contact">오시는 길</a>
-  </nav>
-  <main>
+
+  <main class="wrap">
+    <!-- 소개 -->
     <section id="about">
-      <h2>본당 소개</h2>
-      <p>매탄동성당은 수원교구 소속으로, 지역 신자들과 함께 신앙 공동체를 이루고 있습니다. 
-         다양한 미사와 교육, 봉사활동을 통해 복음을 전하고 사랑을 실천합니다.</p>
-    </section>
-    <section id="history">
-      <h2>연혁</h2>
-      <p>1999년 설립 이후, 매탄동성당은 꾸준히 성장하며 지역사회와 함께하는 신앙의 터전이 되어왔습니다. 
-         현재 25주년을 맞아 다양한 기념행사를 준비하고 있습니다.</p>
-      <div class="images">
-        <img src="assets/interior1.jpg" alt="성당 내부">
-        <img src="assets/hero.jpg" alt="성당 전경">
+      <div class="card">
+        <h2>본당 소개</h2>
+        <ul class="kv">
+          <li><span class="k">소속</span><span class="v">천주교 <strong>수원교구</strong></span></li>
+          <li><span class="k">주보성인</span><span class="v">아기 예수의 성녀 데레사</span></li>
+          <li><span class="k">설립일</span><span class="v">2002.01.29.</span></li>
+          <li><span class="k">신자 수</span><span class="v">약 2,978명</span></li>
+          <li><span class="k">연락처</span><span class="v">사무실 031-216-0573 · 팩스 031-216-0578 · 이메일 maetan@casuwon.or.kr</span></li>
+          <li><span class="k">주소</span><span class="v">경기도 수원시 영통구 인계로284번길 15 (지번: 매탄동 808)</span></li>
+        </ul>
       </div>
     </section>
+
+    <!-- 미사 -->
+    <section id="mass">
+      <div class="card">
+        <h2>미사 안내 (Mass Times)</h2>
+        <ul class="kv">
+          <li><span class="k">주일</span><span class="v">07:00 · 10:30(교중) · 19:30(청년)</span></li>
+          <li><span class="k">토요일</span><span class="v">16:00(어린이) · 19:30(청소년)</span></li>
+          <li><span class="k">평일</span><span class="v">월 09:00 · 화 19:30 · 수 10:00 · 목 19:30 · 금 10:00</span></li>
+          <li><span class="k">성사</span><span class="v">고해: 매 미사 30분 전</span></li>
+          <li><span class="k">기타</span><span class="v">예비자 교리 주일 09:00 · 유아세례 3·6·9·12월 첫째 토 16:00 · 성모신심미사 매월 첫째 토 10:00 · 병자영성체 매월 셋째 목(사무실 신청) · 차·집 축복(사무실 신청)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 연혁/건축 -->
+    <section id="history">
+      <div class="card">
+        <h2>성당 연혁 & 건축</h2>
+        <ul class="kv">
+          <li><span class="k">2002</span><span class="v">본당 설립</span></li>
+          <li><span class="k">2017</span><span class="v"><strong>제22회 경기도 건축문화상 특별상</strong> (사용승인/비주거)</span></li>
+          <li><span class="k">2024</span><span class="v">25주년 준비위원회 발족</span></li>
+          <li><span class="k">2025</span><span class="v">25주년 기념 주간 준비</span></li>
+        </ul>
+        <p class="muted" style="margin-top:6px">건축 개요: 종교시설, 지상 3층·지하 1층, 대지 1,511.30㎡, 연면적 2,545.23㎡, RC/철골.</p>
+      </div>
+    </section>
+
+    <!-- 사진 -->
+    <section id="photos">
+      <div class="card">
+        <h2>성당 사진</h2>
+        <div class="gallery">
+          <img src="assets/interior1.jpg" alt="성전 십자가상과 제대">
+          <img src="assets/hero.jpg" alt="미사 중 성당 내부 전경">
+        </div>
+      </div>
+    </section>
+
+    <!-- 길찾기 -->
     <section id="contact">
-      <h2>오시는 길</h2>
-      <p>주소: 경기도 수원시 영통구 매동 인계로284번길 15<br/>
-         전화: 031-216-0573</p>
-      <p><a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank">Google 지도에서 보기</a></p>
+      <div class="card">
+        <h2>찾아오시는 길</h2>
+        <p class="muted">아래 버튼을 누르면 지도 앱으로 연결됩니다.</p>
+        <p><a class="btn btn-primary" href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener">지도 크게 보기</a></p>
+        <div style="border-radius:12px;overflow:hidden;box-shadow:var(--shadow);margin-top:10px">
+          <iframe title="매탄동성당 지도" style="border:0;width:100%;height:300px"
+                  src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
     </section>
   </main>
+
   <footer>
-    &copy; 2025 매탄동성당 | <a href="https://cafe.daum.net/maetancathoric" target="_blank">다음카페 바로가기</a>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+      <div>© <span id="y"></span> 매탄동성당</div>
+      <div><a href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">다음카페 바로가기</a></div>
+    </div>
   </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
-/* ==== PC도 모바일처럼 한 줄 레이아웃로 통일 ==== */
-@media (min-width: 860px){
-  /* 카드/그리드: 전부 한 줄(1열) */
-  .twocol { grid-column: span 12 !important; }
-  .wrap { max-width: 860px; } /* 너무 넓지 않게 */
-
-  /* 라벨-값 리스트: 모바일처럼 위/아래로 쌓기 */
-  .list.labeled li {
-    grid-template-columns: 1fr !important;
-  }
-  .list .label {
-    display: inline-block;
-    margin-bottom: 6px;
-  }
-
-  /* 갤러리도 간결하게(2장씩) */
-  .gallery {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  /* 히어로 영역 높이 살짝 줄여 가독성 확보 */
-  .hero { min-height: 48vh; }
-}
-
-/* 폰트 대비 조금 키우기(선택) */
-@media (min-width: 1024px){
-  body { font-size: 16.5px; }
-  .section-title { font-size: 28px; }
-}
