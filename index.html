@@ -9,15 +9,10 @@
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
 
 <style>
-  :root{
-    --bg:#eef2f1; --ink:#1d1d1d; --green:#1c3f39; --gold:#c9ac78;
-    --maxw:900px;
-  }
+  :root{ --bg:#eef2f1; --ink:#1d1d1d; --green:#1c3f39; --gold:#c9ac78; --maxw:900px; }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'GmarketSans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
   body{line-height:1.75;font-weight:300}
-
-  /* 타이포 단계 */
   .bold{font-weight:700} .regular{font-weight:500} .light{font-weight:300}
 
   /* 상단 바 */
@@ -30,10 +25,11 @@
   .cafe:hover{background:var(--green);color:#fff}
 
   /* 이미지 섹션 */
+  main{padding:10px 0 0}
   .section{background:#fff;margin:14px auto;border-radius:14px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.06)}
   .section img{display:block;width:100%;height:auto}
 
-  /* 4번 이미지 클릭 오버레이(반응형: 3등분) */
+  /* 4번 이미지 클릭 오버레이(3등분) */
   .menu-image{position:relative}
   .hotzones{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr 1fr}
   .hotzones a{display:block}
@@ -60,22 +56,26 @@
 <main class="wrap" aria-label="Main">
   <!-- 1. 상단 히어로 이미지 -->
   <section class="section">
-    <img src="assets/maetan_1.jpg" alt="매탄동성당 전경 배너 이미지" />
+    <img src="assets/maetan_1.jpg" alt="매탄동성당 전경 배너 이미지"
+         onerror="this.onerror=null; this.src='maetan_1.jpg';">
   </section>
 
   <!-- 2. 본당소개 이미지 -->
   <section class="section">
-    <img src="assets/maetan_2.jpg" alt="본당 소개 이미지" />
+    <img src="assets/maetan_2.jpg" alt="본당 소개 이미지"
+         onerror="this.onerror=null; this.src='maetan_2.jpg';">
   </section>
 
   <!-- 3. 미사안내 이미지 -->
   <section class="section">
-    <img src="assets/maetan_3.jpg" alt="미사 시간 안내 이미지" />
+    <img src="assets/maetan_3.jpg" alt="미사 시간 안내 이미지"
+         onerror="this.onerror=null; this.src='maetan_3.jpg';">
   </section>
 
   <!-- 4. 메뉴 이미지(3블록 클릭) -->
   <section class="section menu-image" aria-label="메뉴">
-    <img src="assets/maetan_4.jpg" alt="본당소개, 주보, 사진 메뉴 이미지" />
+    <img src="assets/maetan_4.jpg" alt="본당소개, 주보, 사진 메뉴 이미지"
+         onerror="this.onerror=null; this.src='maetan_4.jpg';">
     <div class="hotzones" aria-hidden="false">
       <a href="about.html" title="본당소개 About the Parish"></a>
       <a href="bulletin.html" title="주보 Parish Bulletin"></a>
