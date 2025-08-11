@@ -1,92 +1,146 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>매탄동성당</title>
-  <link href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>매탄동성당 | Maetan-dong Catholic Parish</title>
+
+  <!-- G마켓 산스 -->
+  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
+
   <style>
-    :root {
-      --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    :root{
+      --ink:#1e1e1e; --muted:#6b7280; --green:#1c3f39; --bg:#f8faf9;
+      --maxw:980px; --radius:14px; --shadow:0 10px 26px rgba(0,0,0,.06);
     }
-    body {
-      font-family: 'Gmarket Sans', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      text-align: center;
-    }
-    header {
-      background-color: #f8f8f8;
-      padding: 15px;
-      box-shadow: var(--shadow);
-    }
-    header h1, header h2 {
-      margin: 5px 0;
-      font-weight: 700;
-    }
-    header h2 a {
-      text-decoration: none;
-      color: #2a5d34;
-      font-weight: 400;
-    }
-    .main-hero {
-      display: block;
-      width: 100%;
-      max-width: 1200px;
-      height: auto;
-      margin: 22px auto;
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-    }
-    @media (min-width: 760px) {
-      .main-hero {
-        width: 95%;
-      }
-    }
-    @media (min-width: 1024px) {
-      .main-hero {
-        width: 90%;
-      }
-    }
-    .section {
-      padding: 20px;
-    }
-    .section h2 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    .section p {
-      font-weight: 300;
-      fo주일 07:00 / 10시30분(교중) / 19시30분(청년)<br>
-      평일미사: 월 09:00 / 화, 목 19:30 / 수, 금 10:00 <br>
-      고해성사: 매 미사 30분 전
-    </p>
-  </section>
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'GmarketSans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{line-height:1.75;font-weight:300}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
 
-  <!-- 오시는 길 -->
-<section id="location" style="text-align:center; padding:40px 20px;">
-    <h2 style="font-size:2em; margin-bottom:20px;">오시는 길</h2>
-    
-    <!-- 지도 이미지 -->
-    <a href="https://www.google.com/maps/place/천주교+매탄동+성당/@37.264486,127.039445,17z" target="_blank" title="구글지도에서 열기">
-        <img src="map_image.jpg" alt="매탄동성당 위치 지도" 
-             style="width:100%; max-width:800px; height:auto; border:1px solid #ccc; border-radius:8px;">
-    </a>
-    
-    <!-- 주소와 연락처 -->
-    <div style="margin-top:20px; font-size:1.1em; line-height:1.6;">
-        <p>경기도 수원시 영통구 인계로284번길 15</p>
-        <p>사무실: 031-216-0573</p>
-        <p>Email: <a href="mailto:maetan@casuwon.or.kr">maetan@casuwon.or.kr</a></p>
-    </div>
+    /* 상단바(높이 유지, 중앙 정렬) */
+    .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb}
+    .nav{height:64px;display:flex;align-items:center;justify-content:center}
+    .nav-inner{display:flex;align-items:center;justify-content:center}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--green)}
+    .brand .logo{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:700}
+    .brand span{font-weight:700;font-size:18px}
 
-    <!-- 구글지도 링크 버튼 -->
-    <div style="margin-top:15px;">
-        <a href="https://www.google.com/maps/place/천주교+매탄동+성당/@37.264486,127.039445,17z" target="_blank" 
-           style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:5px;">
-           📍 구글지도에서 열기
-        </a>
+    /* 2cm 간격: 데스크톱/태블릿에선 76px, 모바일에선 12px로 축소 */
+    .spacer{width:12px}
+    @media (min-width:760px){ .spacer{width:76px} }
+
+    /* 둥근 버튼 */
+    .btn-cafe{
+      display:inline-block;color:var(--green);text-decoration:none;border:2px solid var(--green);
+      padding:8px 16px;border-radius:999px;font-weight:700;white-space:nowrap
+    }
+    .btn-cafe:hover{background:var(--green);color:#fff}
+
+    /* 메인 이미지: 모바일 100% / 태블릿 95% / 데스크톱 90% */
+    .main-hero{
+      display:block;width:100%;max-width:1200px;height:auto;margin:22px auto;border-radius:10px;box-shadow:var(--shadow)
+    }
+    @media (min-width:760px){ .main-hero{ width:95%; } }
+    @media (min-width:1024px){ .main-hero{ width:90%; } }
+
+    /* 카드 공통 */
+    section{padding:14px 0}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:14px 0}
+    h2{margin:0 0 10px;color:var(--green);font-weight:700}
+    .muted{color:var(--muted)}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;border-bottom:1px solid #eef2f7}
+    th{text-align:left;color:var(--green);font-weight:700}
+    td{font-weight:400}
+
+    /* 오시는 길 */
+    .visit-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:760px){.visit-grid{grid-template-columns:1fr 1fr}}
+    .map-img{width:100%;max-width:800px;height:auto;border-radius:12px;box-shadow:var(--shadow);border:1px solid #e5e7eb;margin:0 auto}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+    .actions a{color:var(--green);text-decoration:none}
+    .actions a:hover{text-decoration:underline}
+
+    footer{padding:18px 0 30px}
+    .foot{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;text-align:center}
+  </style>
+</head>
+<body>
+
+  <!-- 상단: 중앙 정렬, 2cm 간격 버튼 -->
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="nav-inner">
+        <div class="brand"><div class="logo">✝</div><span>매탄동성당</span></div>
+        <div class="spacer" aria-hidden="true"></div>
+        <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">매탄동성당 커뮤니티</a>
+      </div>
     </div>
-</section>
+  </div>
+
+  <main class="wrap" aria-label="Main">
+    <!-- 상단 이미지 -->
+    <img src="maetan.jpg" alt="매탄동성당 전경" class="main-hero" onerror="this.onerror=null;this.src='assets/maetan.jpg'">
+
+    <!-- 본당 소개 -->
+    <section>
+      <div class="card">
+        <h2>본당 소개 (About the Parish)</h2>
+        <p class="muted" style="margin-top:-4px">Maetan-dong Catholic Parish · Diocese of Suwon</p>
+        <p><strong>주보성인:</strong> 아기 예수의 성녀 데레사 · <strong>설립:</strong> 2002.01.29.</p>
+        <p>매탄동성당은 신앙과 친교, 봉사로 성장하는 지역 공동체입니다. 주일·평일 미사와 성사, 다양한 사목 활동을 통해 복음을 살아갑니다.</p>
+      </div>
+    </section>
+
+    <!-- 미사 시간 -->
+    <section>
+      <div class="card">
+        <h2>미사 시간 (Mass Schedule)</h2>
+        <table aria-label="Mass Schedule">
+          <tr><th>주일</th><td>07:00 · 10:30(교중) · 19:30(청년)</td></tr>
+          <tr><th>토요일</th><td>16:00(어린이) · 19:30(청소년)</td></tr>
+          <tr><th>평일</th><td>월 09:00 · 화 19:30 · 수 10:00 · 목 19:30 · 금 10:00</td></tr>
+          <tr><th>고해성사</th><td>매 미사 30분 전 (Confession: 30 minutes before each Mass)</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 오시는 길: 지도 이미지 + 링크/전화 -->
+    <section>
+      <div class="card">
+        <h2>오시는 길 (Visit)</h2>
+        <div class="visit-grid">
+          <!-- 올려주신 구글지도 스크린샷 사용 -->
+          <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener" title="구글지도에서 열기">
+            <img src="map_image.jpg" alt="매탄동성당 위치 지도" class="map-img" onerror="this.onerror=null;this.src='assets/map_image.jpg'">
+          </a>
+
+          <!-- 옵션: 구글 지도 임베드(원치 않으면 이 iframe 블록을 지워도 됩니다) -->
+          <iframe class="map-img" style="border:0" loading="lazy" allowfullscreen
+            src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed">
+          </iframe>
+        </div>
+
+        <p class="muted" style="margin-top:10px">
+          주소: 경기도 수원시 영통구 인계로284번길 15 (매탄동 808)
+        </p>
+        <p class="actions">
+          <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener">📍 구글지도에서 열기</a>
+          <span class="muted">|</span>
+          <a href="tel:0312160573">☎ 사무실 031-216-0573로 전화</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+      <div class="foot">
+        <p class="muted">© <span id="y"></span> Maetan-dong Catholic Parish</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
