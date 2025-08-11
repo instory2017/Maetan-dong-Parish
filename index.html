@@ -48,7 +48,7 @@ nav a{font-weight:500}
 .hero{
   background:
     linear-gradient(180deg, rgba(28,63,57,.90), rgba(28,63,57,.60)),
-    url('assets/hero.jpg') center/cover no-repeat; /* 실제 전경사진으로 교체 */
+    url('assets/hero.jpg') center/cover no-repeat;
   color:#fff;padding:88px 0 96px
 }
 .hero h2{font-size:44px;margin:0 0 8px;font-weight:700}
@@ -63,8 +63,14 @@ section{padding:56px 0}
 .twocol{grid-column:span 12}
 @media (min-width:860px){.twocol{grid-column:span 6}}
 .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
-.list li{display:flex;gap:10px;align-items:flex-start}
-.badge{width:26px;min-width:26px;height:26px;border-radius:6px;background:var(--bg);display:grid;place-items:center;color:var(--navy);font-weight:700}
+
+/* 가독성 향상: 라벨/값 2열 */
+.list.labeled li{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px 14px;border-bottom:1px solid #eef2f7;align-items:baseline;background:#fff;border-radius:10px}
+.list.labeled li + li{margin-top:6px}
+.list .label{font-weight:700;color:var(--navy);background:#e7efe9;padding:6px 10px;border-radius:8px;justify-self:start}
+.list .value{font-weight:500;color:var(--ink);line-height:1.8}
+@media (min-width:1024px){body{font-size:17px} .section-title{font-size:32px}}
+
 .notice{display:grid;gap:10px}
 .notice a{display:flex;align-items:center;justify-content:space-between;border:1px solid #eef2f7;border-radius:12px;padding:14px 16px;background:#fff}
 .notice a:hover{border-color:var(--gold)}
@@ -119,32 +125,39 @@ section{padding:56px 0}
     <h3 class="section-title">본당 소개</h3>
     <div class="grid">
       <div class="card twocol">
-        <ul class="list" aria-label="핵심 정보">
-          <li><span class="badge">소속</span> 천주교 <strong>수원교구</strong></li>
-          <li><span class="badge">주보</span> 아기 예수의 성녀 데레사</li>
-          <li><span class="badge">설립</span> 2002.01.29.</li>
-          <li><span class="badge">신자</span> 약 2,978명</li>
-          <li><span class="badge">연락</span> 사무실 031-216-0573 · 팩스 031-216-0578 · 이메일 maetan@casuwon.or.kr</li>
-          <li><span class="badge">주소</span> 경기도 수원시 영통구 인계로284번길 15 (지번: 매탄동 808)</li>
+        <ul class="list labeled" aria-label="핵심 정보">
+          <li><span class="label">소속</span><span class="value">천주교 <strong>수원교구</strong></span></li>
+          <li><span class="label">주보</span><span class="value">아기 예수의 성녀 데레사</span></li>
+          <li><span class="label">설립</span><span class="value">2002.01.29.</span></li>
+          <li><span class="label">신자</span><span class="value">약 2,978명</span></li>
+          <li><span class="label">연락</span><span class="value">사무실 031-216-0573 · 팩스 031-216-0578 · 이메일 maetan@casuwon.or.kr</span></li>
+          <li><span class="label">주소</span><span class="value">경기도 수원시 영통구 인계로284번길 15 (지번: 매탄동 808)</span></li>
         </ul>
         <div class="divider"></div>
         <h3>미사 안내 (Mass Times)</h3>
-        <ul class="list">
-          <li><span class="badge">주일</span> 07:00 · 10:30(교중) · 19:30(청년)</li>
-          <li><span class="badge">토요</span> 16:00(어린이) · 19:30(청소년)</li>
-          <li><span class="badge">평일</span> 월 09:00 · 화 19:30 · 수 10:00 · 목 19:30 · 금 10:00</li>
-          <li><span class="badge">성사</span> 고해: 매 미사 30분 전</li>
-          <li><span class="badge">기타</span> 예비자 교리 주일 09:00 / 유아세례 3·6·9·12월 첫째 토 16:00 / 성모신심미사 매월 첫째 토 10:00 / 병자영성체 매월 셋째 목(사무실 신청) / 차·집 축복(사무실 신청)</li>
+        <ul class="list labeled">
+          <li><span class="label">주일</span><span class="value">07:00 · 10:30(교중) · 19:30(청년)</span></li>
+          <li><span class="label">토요</span><span class="value">16:00(어린이) · 19:30(청소년)</span></li>
+          <li><span class="label">평일</span><span class="value">월 09:00 · 화 19:30 · 수 10:00 · 목 19:30 · 금 10:00</span></li>
+          <li><span class="label">성사</span><span class="value">고해: 매 미사 30분 전</span></li>
+          <li><span class="label">기타</span><span class="value">예비자 교리 주일 09:00 / 유아세례 3·6·9·12월 첫째 토 16:00 / 성모신심미사 매월 첫째 토 10:00 / 병자영성체 매월 셋째 목(사무실 신청) / 차·집 축복(사무실 신청)</span></li>
         </ul>
       </div>
 
       <div class="card twocol" id="history">
-        <h3>성당 연혁 (요약)</h3>
-        <ul class="list">
-          <li><span class="badge">2002</span> 본당 설립</li>
-          <li><span class="badge">2017</span> <strong>제22회 경기도 건축문화상 특별상</strong> 수상 (사용승인/비주거 부문)</li>
-          <li><span class="badge">2024</span> 25주년 준비위원회 발족</li>
-          <li><span class="badge">2025</span> 25주년 기념 주간 준비</li>
+        <h3>성당 연혁 & 건축</h3>
+        <ul class="list labeled">
+          <li><span class="label">2002</span><span class="value">본당 설립</span></li>
+          <li><span class="label">2017</span><span class="value"><strong>제22회 경기도 건축문화상 특별상</strong> (사용승인/비주거)</span></li>
+          <li><span class="label">2024</span><span class="value">25주년 준비위원회 발족</span></li>
+          <li><span class="label">2025</span><span class="value">25주년 기념 주간 준비</span></li>
+        </ul>
+        <div class="divider"></div>
+        <h3>건축 개요</h3>
+        <ul class="list labeled">
+          <li><span class="label">구분</span><span class="value">종교시설 · 지상 3층 / 지하 1층</span></li>
+          <li><span class="label">대지</span><span class="value">1,511.30㎡ · 연면적 2,545.23㎡</span></li>
+          <li><span class="label">구조</span><span class="value">철근콘크리트 · 철골</span></li>
         </ul>
         <p class="small muted">출처: 경기도 건축문화상 수상작 DB.</p>
       </div>
@@ -152,12 +165,13 @@ section{padding:56px 0}
   </div>
 </section>
 
-<section id="priests">
+<section id="photos">
   <div class="wrap">
-    <p class="kicker">Clergy & Religious</p>
-    <h3 class="section-title">사제 및 수도자</h3>
-    <div class="card">
-      <p class="small muted">※ 주임/부주임/보좌 신부님 성함과 인사말을 보내주시면 반영하겠습니다.</p>
+    <p class="kicker">Photo</p>
+    <h3 class="section-title">성당 전경 및 내부</h3>
+    <div class="gallery" role="list" aria-label="성당 사진">
+      <img src="assets/interior1.jpg" alt="매탄동성당 성전 내부"/>
+      <img src="assets/hero.jpg" alt="매탄동성당 미사 전경"/>
     </div>
   </div>
 </section>
@@ -190,23 +204,6 @@ section{padding:56px 0}
   </div>
 </section>
 
-<section id="photos">
-  <div class="wrap">
-    <p class="kicker">Photo</p>
-    <h3 class="section-title">성당 전경 및 행사 사진</h3>
-    <div class="gallery" role="list" aria-label="행사 사진">
-      <img src="assets/view1.jpg" alt="성당 외부 전경(1)"/>
-      <img src="assets/view2.jpg" alt="성당 외부 전경(2)"/>
-      <img src="assets/interior1.jpg" alt="성전 내부(1)"/>
-      <img src="assets/interior2.jpg" alt="성전 내부(2)"/>
-    </div>
-    <p class="small muted" style="margin-top:10px">
-      사진 출처 참고: <a href="https://ohandrew.tistory.com/7075927" target="_blank" rel="noopener">ohandrew.tistory.com/7075927</a>
-      (권장: 직접 촬영/허가 후 <code>assets/</code>로 업로드)
-    </p>
-  </div>
-</section>
-
 <section id="contact">
   <div class="wrap">
     <p class="kicker">Visit</p>
@@ -221,7 +218,6 @@ section{padding:56px 0}
       </div>
       <div class="card twocol">
         <h3>지도</h3>
-        <!-- 주소 기반 임베드: 바로 표시됩니다 -->
         <iframe class="map" loading="lazy" allowfullscreen
           src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed">
         </iframe>
