@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1c3f39">
 
-<!-- SB 어그로체 -->
+<!-- SB 어그로체 (Bold/Regular/Light) -->
 <style>
 @font-face {font-family:'SBAggro';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/SBAggroB.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 @font-face {font-family:'SBAggro';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/SBAggroM.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
@@ -19,6 +19,7 @@
 
 <style>
 :root{
+  /* ① 웜 아이보리/그린 톤 */
   --navy:#1c3f39; --gold:#c0a06a; --bg:#faf7f2; --card:#ffffff;
   --ink:#1b1b1b; --muted:#6b7280; --radius:14px;
   --shadow:0 10px 24px rgba(28,63,57,.08);
@@ -45,15 +46,24 @@ nav a{font-weight:500}
   .menu.open ul{display:grid}
   .menu.open a{padding:14px 20px;border-top:1px solid #f1f5f9}
 }
+
+/* ── 히어로(상단) : 십자가상 사진 + 오버레이 ── */
 .hero{
-  background:
-    linear-gradient(180deg, rgba(28,63,57,.90), rgba(28,63,57,.60)),
-    url('assets/hero.jpg') center/cover no-repeat;
-  color:#fff;padding:88px 0 96px
+  position:relative;
+  min-height:56vh;
+  display:flex;align-items:center;
+  color:#fff;
+  background:url('assets/interior1.jpg') center/cover no-repeat; /* 십자가상 사진 */
 }
-.hero h2{font-size:44px;margin:0 0 8px;font-weight:700}
-.hero p{font-weight:300;margin:8px 0 26px}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35)); /* 가독성 오버레이 */
+}
+.hero .inner{position:relative;z-index:1}
+.hero h2{font-size:44px;margin:0 0 10px;font-weight:700}
+.hero p{font-weight:300;margin:6px 0 22px;max-width:720px}
 .pill{display:inline-block;padding:6px 12px;border-radius:999px;background:#fff;color:#111;font-weight:700}
+
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
 section{padding:56px 0}
 .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
@@ -62,9 +72,9 @@ section{padding:56px 0}
 .section-title{color:var(--navy);font-size:28px;margin:0 0 10px;font-weight:700}
 .twocol{grid-column:span 12}
 @media (min-width:860px){.twocol{grid-column:span 6}}
-.list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
 
-/* 가독성 향상: 라벨/값 2열 */
+.list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+/* PC 가독성 향상: 라벨/값 2열 */
 .list.labeled li{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px 14px;border-bottom:1px solid #eef2f7;align-items:baseline;background:#fff;border-radius:10px}
 .list.labeled li + li{margin-top:6px}
 .list .label{font-weight:700;color:var(--navy);background:#e7efe9;padding:6px 10px;border-radius:8px;justify-self:start}
@@ -108,11 +118,11 @@ section{padding:56px 0}
 </header>
 
 <section class="hero">
-  <div class="wrap">
+  <div class="wrap inner">
     <span class="pill">천주교 수원교구 · Suwon Diocese</span>
     <h2>25주년을 준비하는 우리 동네 본당</h2>
     <p>매탄동 본당(주보성인: 아기 예수의 성녀 데레사)은 지역과 세계를 잇는 신앙 공동체입니다. 미사·주보·행사 소식을 한 곳에서 확인하고, 다음카페 커뮤니티로 연결됩니다.</p>
-    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
       <a class="btn btn-primary" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">다음카페 바로가기</a>
       <a class="btn btn-outline" href="#notices">이번 주 소식 보기</a>
     </div>
@@ -152,14 +162,6 @@ section{padding:56px 0}
           <li><span class="label">2024</span><span class="value">25주년 준비위원회 발족</span></li>
           <li><span class="label">2025</span><span class="value">25주년 기념 주간 준비</span></li>
         </ul>
-        <div class="divider"></div>
-        <h3>건축 개요</h3>
-        <ul class="list labeled">
-          <li><span class="label">구분</span><span class="value">종교시설 · 지상 3층 / 지하 1층</span></li>
-          <li><span class="label">대지</span><span class="value">1,511.30㎡ · 연면적 2,545.23㎡</span></li>
-          <li><span class="label">구조</span><span class="value">철근콘크리트 · 철골</span></li>
-        </ul>
-        <p class="small muted">출처: 경기도 건축문화상 수상작 DB.</p>
       </div>
     </div>
   </div>
@@ -221,7 +223,6 @@ section{padding:56px 0}
         <iframe class="map" loading="lazy" allowfullscreen
           src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed">
         </iframe>
-        <p class="small muted" style="margin-top:8px">※ 구글지도 퍼가기 코드로 교체해도 됩니다.</p>
       </div>
     </div>
   </div>
