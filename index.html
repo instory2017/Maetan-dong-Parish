@@ -131,3 +131,32 @@
   </footer>
 </body>
 </html>
+/* ==== PC도 모바일처럼 한 줄 레이아웃로 통일 ==== */
+@media (min-width: 860px){
+  /* 카드/그리드: 전부 한 줄(1열) */
+  .twocol { grid-column: span 12 !important; }
+  .wrap { max-width: 860px; } /* 너무 넓지 않게 */
+
+  /* 라벨-값 리스트: 모바일처럼 위/아래로 쌓기 */
+  .list.labeled li {
+    grid-template-columns: 1fr !important;
+  }
+  .list .label {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  /* 갤러리도 간결하게(2장씩) */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* 히어로 영역 높이 살짝 줄여 가독성 확보 */
+  .hero { min-height: 48vh; }
+}
+
+/* 폰트 대비 조금 키우기(선택) */
+@media (min-width: 1024px){
+  body { font-size: 16.5px; }
+  .section-title { font-size: 28px; }
+}
