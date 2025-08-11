@@ -9,13 +9,13 @@
     :root{ --ink:#1e1e1e; --muted:#6b7280; --green:#1c3f39; --maxw:980px; }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:'GmarketSans',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    body{line-height:1.75;font-weight:300}
+    body{line-height:1.75;font-weight:300;font-size:clamp(16px, 2.6vw, 18px)}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
 
-    /* 헤더(높이 96px) */
+    /* ===== 헤더 ===== */
     .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb}
     .nav{height:96px;display:flex;align-items:center;justify-content:center}
-    .nav-inner{display:flex;align-items:center;justify-content:center}
+    .nav-inner{display:flex;align-items:center;justify-content:center;gap:0}
     .brand{display:flex;align-items:center;gap:10px;color:var(--green)}
     .brand .logo{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:700}
     .brand span{font-weight:700;font-size:19px}
@@ -25,36 +25,55 @@
       padding:10px 18px;border-radius:999px;font-weight:700;white-space:nowrap}
     .btn-cafe:hover{background:var(--green);color:#fff}
 
-    /* 메인 이미지 + 클릭 핫스팟 */
-    .hero-wrap{position:relative;margin:24px auto 10px;max-width:100%}
-    .main-hero{display:block;width:100%;height:auto;border-radius:10px}
-    .hotspot{
-      position:absolute;display:block;z-index:5;border-radius:12px;outline:0;
-    }
-    .hotspot:focus-visible{outline:3px solid rgba(28,63,57,.6);outline-offset:2px}
-    .hotspot:hover{box-shadow:inset 0 0 0 3px rgba(28,63,57,.15)}
-    /* ↓ maetan.jpg 하단의 3썸네일 위치(퍼센트) */
-    .spot-about   { left:4.5%;  top:62.5%; width:27%; height:22%; }
-    .spot-bulletin{ left:36.5%; top:62.5%; width:27%; height:22%; }
-    .spot-gallery { left:68.5%; top:62.5%; width:27%; height:22%; }
-    @media (max-width:480px){
-      .spot-about,.spot-bulletin,.spot-gallery{ top:62%; height:24%; }
+    /* 모바일 헤더: 브랜드 숨기고 버튼만 우측 정렬 */
+    @media (max-width:600px){
+      .nav{height:80px}
+      .wrap.nav{padding:0 12px}
+      .nav-inner{justify-content:flex-end}
+      .brand{display:none}
+      .spacer{display:none}
     }
 
+    /* ===== 히어로(데스크톱 / 모바일 분리) ===== */
+    .hero{position:relative;margin:24px auto 10px;max-width:100%}
+    .hero img{display:block;width:100%;height:auto;border-radius:10px}
+    .hotspot{position:absolute;display:block;z-index:5;border-radius:12px;outline:0}
+    .hotspot:focus-visible{outline:3px solid rgba(28,63,57,.6);outline-offset:2px}
+    .hotspot:hover{box-shadow:inset 0 0 0 3px rgba(28,63,57,.12)}
+
+    /* 데스크톱 히어로 & 좌표 (PC 유지) */
+    .hero-desktop{display:none}
+    @media (min-width:601px){
+      .hero-desktop{display:block}
+      /* 하단 썸네일만 눌리도록 좁은 범위 */
+      .desk-about   { left:5.5%;  top:64.5%; width:24%; height:18%; }
+      .desk-bulletin{ left:38.5%; top:64.5%; width:24%; height:18%; }
+      .desk-gallery { left:71.0%; top:64.5%; width:24%; height:18%; }
+    }
+
+    /* 모바일 히어로 & 좌표(모바일 전용 이미지 기준) */
+    .hero-mobile{display:block}
+    @media (min-width:601px){ .hero-mobile{display:none} }
+    /* 썸네일만 딱 클릭되게 범위 좁힘(필요시 0.5% 단위로 미세조정) */
+    .mo-about   { left:7%;  top:66%; width:26%; height:15%; }
+    .mo-bulletin{ left:37%; top:66%; width:26%; height:15%; }
+    .mo-gallery { left:67%; top:66%; width:26%; height:15%; }
+
+    /* ===== 공통 섹션 ===== */
     section{padding:16px 0}
     h2{margin:0 0 10px;color:var(--green);font-weight:700}
     .muted{color:var(--muted)}
-
     .map-embed{width:100%;height:360px;border:0;border-radius:10px}
-
     footer{padding:18px 0 30px;text-align:center;color:var(--muted)}
   </style>
 </head>
 <body>
+
   <!-- 헤더 -->
   <div class="topbar">
     <div class="wrap nav">
       <div class="nav-inner">
+        <!-- PC/태블릿에만 보이는 중앙 브랜드 + 간격 + 버튼 -->
         <div class="brand"><div class="logo">✝</div><span>매탄동성당</span></div>
         <div class="spacer" aria-hidden="true"></div>
         <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">매탄동성당 커뮤니티</a>
@@ -63,16 +82,26 @@
   </div>
 
   <main class="wrap" aria-label="Main">
-    <!-- 메인 이미지 + 하단 3영역 핫스팟 -->
-    <div class="hero-wrap" aria-label="바로가기 이미지">
-      <img src="maetan.jpg" alt="매탄동성당 메인 이미지" class="main-hero"
-           onerror="this.onerror=null;this.src='assets/maetan.jpg'">
-      <a class="hotspot spot-about"    href="about.html"    aria-label="본당소개"></a>
-      <a class="hotspot spot-bulletin" href="bulletin.html" aria-label="주보"></a>
-      <a class="hotspot spot-gallery"  href="gallery.html"  aria-label="사진"></a>
+
+    <!-- 데스크톱 전용 히어로 (기존 유지) -->
+    <div class="hero hero-desktop" aria-label="바로가기 이미지(데스크톱)">
+      <img src="maetan.jpg" alt="매탄동성당 메인(데스크톱)" onerror="this.onerror=null;this.src='assets/maetan.jpg'">
+      <a class="hotspot desk-about"    href="about.html"    aria-label="본당소개"></a>
+      <a class="hotspot desk-bulletin" href="bulletin.html" aria-label="주보"></a>
+      <a class="hotspot desk-gallery"  href="gallery.html"  aria-label="사진"></a>
     </div>
 
-    <!-- 오시는 길 -->
+    <!-- 모바일 전용 히어로 (모바일 디자인용 이미지) -->
+    <div class="hero hero-mobile" aria-label="바로가기 이미지(모바일)">
+      <!-- 모바일 이미지 파일명을 maetan-mobile.jpg로 업로드해 주세요 -->
+      <img src="maetan-mobile.jpg" alt="매탄동성당 메인(모바일)" onerror="this.onerror=null;this.src='maetan.jpg'">
+      <!-- 썸네일 위치에 정확히 링크 -->
+      <a class="hotspot mo-about"    href="about.html"    aria-label="본당소개"></a>
+      <a class="hotspot mo-bulletin" href="bulletin.html" aria-label="주보"></a>
+      <a class="hotspot mo-gallery"  href="gallery.html"  aria-label="사진"></a>
+    </div>
+
+    <!-- 오시는 길 (PC/모바일 공통) -->
     <section>
       <h2>오시는 길 (Visit)</h2>
       <iframe class="map-embed" loading="lazy" allowfullscreen
