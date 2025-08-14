@@ -102,32 +102,45 @@
 
 <!-- 🙏 기도 한 줄 -->
 <section>
+  <!-- 이미지 -->
   <div style="text-align:center">
     <img 
       src="기도한줄.jpg" 
-      alt="기도 한 줄 배너 이미지" 
-      style="
-        max-width: 100%;
-        width: 70%;
-        height: auto;
-        margin: 0 auto 20px;
-        display: block;
-      "
-      sizes="(max-width: 600px) 40vw, 70vw"
+      alt="기도 한 줄 배너 이미지"
+      class="pray-image"
     />
   </div>
 
+  <!-- 안내 문구 -->
   <p class="muted" style="text-align: center;">
     매탄동성당을 찾은 이들의 마음을 나누는 공간입니다.<br>
     짧은 기도를 남겨보세요. 당신의 마음이 누군가에게 위로가 됩니다.
   </p>
 
+  <!-- 댓글 영역 -->
   <div class="commentbox" style="margin-top:24px"></div>
   <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
   <script>
     commentBox('maetan-parish');
   </script>
 </section>
+
+<style>
+  /* 기도한줄 이미지 반응형 스타일 */
+  .pray-image {
+    width: 35%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  @media (max-width: 600px) {
+    .pray-image {
+      width: 25%;
+    }
+  }
+</style>
 
     <!-- 오시는 길 -->
     <section>
