@@ -33,6 +33,8 @@
     .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb}
     .nav{height:96px;display:flex;align-items:center;justify-content:center}
     .nav-inner{display:flex;align-items:center;justify-content:flex-end;gap:0}
+    .brand{display:none}
+    .spacer{display:none}
     .btn-cafe{
       display:inline-block;color:var(--green);text-decoration:none;border:2px solid var(--green);
       padding:10px 18px;border-radius:999px;font-weight:700;white-space:nowrap
@@ -56,29 +58,31 @@
     .mo-bulletin{ left:37.5%; top:82%; width:25%; height:3%; }
     .mo-gallery { left:70.5%; top:82%; width:25%; height:3%; }
     section{padding:16px 0}
-    h2{margin:0 0 10px;color:var(--green);font-weight:700;text-align:center;}
+    h2{margin:0 0 10px;color:var(--green);font-weight:700}
     .muted{color:var(--muted)}
     .map-embed{width:100%;height:360px;border:0;border-radius:10px}
     footer{padding:18px 0 30px;text-align:center;color:var(--muted)}
 
-    /* 기도한줄 이미지 스타일 */
-    .pray-image {
-      width: 50%;
-      max-width: 480px;
-      height: auto;
-      display: block;
-      margin: 0 auto 20px;
-    }
-    @media (max-width: 600px) {
-      .pray-image {
-        width: 75%;
-      }
-    }
-    /* 댓글창 */
+    /* CommentBox 스타일 */
     .commentbox {
       font-family: 'Noto Sans KR', sans-serif;
       max-width: 720px;
       margin: 0 auto;
+    }
+
+    /* 기도한줄 이미지 반응형 스타일 */
+    .pray-image {
+      width: 50%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    @media (max-width: 600px) {
+      .pray-image {
+        width: 35%;
+      }
     }
   </style>
 </head>
@@ -95,7 +99,7 @@
 
   <main class="wrap" aria-label="Main">
 
-    <!-- 히어로 이미지 -->
+    <!-- 데스크톱 히어로 -->
     <div class="hero hero-desktop" aria-label="바로가기 이미지(데스크톱)">
       <img src="maetan.jpg" alt="매탄동성당 메인(데스크톱)" onerror="this.onerror=null;this.src='assets/maetan.jpg'">
       <a class="hotspot desk-about"    href="about.html"    aria-label="본당소개"></a>
@@ -103,6 +107,7 @@
       <a class="hotspot desk-gallery"  href="gallery.html"  aria-label="사진"></a>
     </div>
 
+    <!-- 모바일 히어로 -->
     <div class="hero hero-mobile" aria-label="바로가기 이미지(모바일)">
       <img src="maetan-mobile.jpg" alt="매탄동성당 메인(모바일)" onerror="this.onerror=null;this.src='maetan.jpg'">
       <a class="hotspot mo-about"    href="about.html"    aria-label="본당소개"></a>
@@ -113,11 +118,7 @@
     <!-- 🙏 기도 한 줄 -->
     <section>
       <div style="text-align:center">
-        <img 
-          src="기도한줄.jpg" 
-          alt="기도 한 줄 배너 이미지"
-          class="pray-image"
-        />
+        <img src="기도한줄.jpg" alt="기도 한 줄 배너 이미지" class="pray-image"/>
       </div>
 
       <p class="muted" style="text-align: center;">
@@ -128,7 +129,7 @@
       <div class="commentbox" style="margin-top:24px"></div>
       <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
       <script>
-        commentBox('maetan-parish');
+        commentBox('⚠️여기에_당신의_Project_ID를_입력하세요');  // 예시: 'maetan-abc123'
       </script>
     </section>
 
