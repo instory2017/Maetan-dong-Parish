@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>매탄동성당 | Maetan-dong Catholic Parish</title>
 
+  <!-- 🔁 index.html 강제 리디렉션 -->
+  <script>
+    if (window.location.pathname.endsWith("index.html")) {
+      window.location.replace(window.location.pathname.replace("index.html", ""));
+    }
+  </script>
+
   <!-- Open Graph / Social Preview -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="매탄동성당">
