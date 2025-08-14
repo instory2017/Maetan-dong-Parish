@@ -63,11 +63,11 @@
     .map-embed{width:100%;height:360px;border:0;border-radius:10px}
     footer{padding:18px 0 30px;text-align:center;color:var(--muted)}
 
-    /* ✅ Disqus 한글 가독성 */
-    #disqus_thread {
+    /* CommentBox 스타일 */
+    .commentbox {
       font-family: 'Noto Sans KR', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -100,24 +100,15 @@
       <a class="hotspot mo-gallery"  href="gallery.html"  aria-label="사진"></a>
     </div>
 
-    <!-- ✅ 기도 한 줄 -->
+    <!-- 🙏 기도 한 줄 -->
     <section>
       <h2>🙏 기도 한 줄</h2>
-      <p class="muted">매탄동성당을 찾은 이들의 마음을 나누는 공간입니다.<br>짧은 기도를 남겨보세요. 당신의 마음이 누군가에게 위로가 됩니다.</p>
+      <p class="muted">매탄동성당을 찾은 이들의 마음을 나누는 공간입니다.<br>
+      짧은 기도를 남겨보세요. 당신의 마음이 누군가에게 위로가 됩니다.</p>
 
-      <div id="disqus_thread"></div>
-      <script>
-          (function() {
-              var d = document, s = d.createElement('script');
-              s.src = 'https://maetan-parish.disqus.com/embed.js';
-              s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-          })();
-      </script>
-      <noscript>
-        댓글을 보시려면 JavaScript를 활성화해주세요.
-        <a href="https://disqus.com/?ref_noscript" target="_blank">Disqus 댓글 보기</a>
-      </noscript>
+      <div class="commentbox"></div>
+      <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+      <script>commentBox('maetan-parish');</script>
     </section>
 
     <!-- 오시는 길 -->
