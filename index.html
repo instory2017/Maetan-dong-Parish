@@ -144,6 +144,52 @@
       color:var(--muted);
       font-size:13px;
     }
+    <style>
+  /* 기존 CSS들 전부 */
+
+  footer{
+    margin-top:18px;
+    padding:18px 0 30px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  /* 👇 바로 이 아래에 붙여넣기 */
+  /* 공지사항 */
+  .notice-section{
+    margin:40px 0 24px;
+  }
+  .notice-title{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:12px;
+    color:#1c3f39;
+  }
+  .notice-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+    border-top:1px solid #e5e7eb;
+  }
+  .notice-list li{
+    padding:12px 4px;
+    border-bottom:1px solid #e5e7eb;
+  }
+  .notice-item{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .notice-item .title{
+    font-weight:700;
+  }
+  .notice-item .meta{
+    font-size:13px;
+    color:#6b7280;
+  }
+</style>
+
   </style>
 </head>
 
@@ -212,6 +258,14 @@
         >
       </a>
     </div>
+
+    <!-- 공지사항 -->
+<section class="notice-section">
+  <h2 class="notice-title">공지사항</h2>
+  <ul id="notice-list" class="notice-list">
+    <!-- notice.js에서 자동으로 채워짐 -->
+  </ul>
+</section>
 
     <!-- 오시는 길 -->
     <section aria-label="오시는 길">
