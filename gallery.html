@@ -15,6 +15,8 @@
       --green:#1c3f39;
       --maxw:1100px;
       --radius:14px;
+      --line:#e5e7eb;
+      --soft:#f3f4f6;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:'GmarketSans','Noto Sans KR',sans-serif}
@@ -22,28 +24,23 @@
 
     .topbar{
       position:sticky;top:0;z-index:50;background:#fff;
-      border-bottom:1px solid #e5e7eb;
+      border-bottom:1px solid var(--line);
     }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
     .nav{
-      min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      min-height:64px;display:flex;align-items:center;justify-content:space-between;
     }
-    .brand{
-      font-weight:800;color:var(--green);letter-spacing:-0.2px;
-    }
+    .brand{font-weight:800;color:var(--green);}
     .back{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 14px;border-radius:999px;border:1px solid #e5e7eb;
+      padding:10px 14px;border-radius:999px;border:1px solid var(--line);
       font-weight:700;
     }
-    .back:hover{background:#f9fafb}
-    .hint{color:var(--muted);font-size:14px}
 
     header{padding:22px 0 10px}
-    h1{margin:0;font-size:22px;letter-spacing:-0.3px}
-    .sub{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
+    h1{margin:0;font-size:22px}
+    .sub{margin-top:8px;color:var(--muted);font-size:14px}
 
-    /* ✅ 사진만 쭈루룩 그리드 */
+    /* 사진 그리드 */
     .grid{
       display:grid;
       gap:10px;
@@ -51,23 +48,22 @@
       grid-template-columns:repeat(2, 1fr);
     }
     @media (min-width:700px){
-      .grid{grid-template-columns:repeat(3, 1fr); gap:12px;}
+      .grid{grid-template-columns:repeat(3, 1fr);}
     }
     @media (min-width:1024px){
-      .grid{grid-template-columns:repeat(4, 1fr); gap:14px;}
+      .grid{grid-template-columns:repeat(4, 1fr);}
     }
 
     .ph{
-      background:#f3f4f6;
+      background:var(--soft);
       border-radius:var(--radius);
       overflow:hidden;
-      box-shadow:0 1px 0 rgba(0,0,0,0.03);
+      border:1px solid rgba(0,0,0,0.04);
     }
-
-    /* 클릭 안 하니까 cursor 기본 */
     .ph img{
-      display:block;width:100%;height:100%;
-      aspect-ratio: 4 / 3;
+      display:block;
+      width:100%;
+      aspect-ratio:4 / 3;
       object-fit:cover;
     }
 
@@ -76,4 +72,55 @@
       text-align:center;
       color:var(--muted);
       font-size:13px;
-      border-top:1px solid
+      border-top:1px solid #f3f4f6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="brand">매탄동성당</div>
+      <a class="back" href="index.html">← 메인</a>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <header>
+      <h1>사진</h1>
+      <p class="sub">본당의 소중한 순간들</p>
+    </header>
+
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <footer>© <span id="y"></span> Maetan-dong Catholic Parish</footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const basePath = "assets/gallery/";
+    const files = [
+      "g01.jpg","g02.jpg","g03.jpg","g04.jpg","g05.jpg","g06.jpg",
+      "g07.jpg","g08.jpg","g09.jpg","g10.jpg","g11.jpg","g12.jpg"
+    ];
+
+    const grid = document.getElementById("grid");
+
+    files.forEach(name => {
+      const box = document.createElement("div");
+      box.className = "ph";
+
+      const img = document.createElement("img");
+      img.src = basePath + name + "?v=2";
+      img.alt = "매탄동성당 사진";
+      img.loading = "lazy";
+
+      img.onerror = () => box.remove();
+
+      box.appendChild(img);
+      grid.appendChild(box);
+    });
+  </script>
+</body>
+</html>
