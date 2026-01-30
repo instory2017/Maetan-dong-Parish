@@ -1,30 +1,165 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>본당소개 | 매탄동성당</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
+
   <style>
-    body{margin:0;font-family:'GmarketSans',sans-serif;color:#1e1e1e}
-    .wrap{max-width:900px;margin:0 auto;padding:24px 16px}
-    a{color:#1c3f39;text-decoration:none}
-    header{padding:14px 0;border-bottom:1px solid #e5e7eb;text-align:center}
-    h1{margin:0;font-size:22px}
-    h2{margin:18px 0 8px;color:#1c3f39}
-    p{line-height:1.8}
+    :root{
+      --ink:#111827;
+      --muted:#6b7280;
+      --green:#1c3f39;
+      --line:#e5e7eb;
+      --maxw:900px;
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:#fff;
+      color:var(--ink);
+      font-family:'GmarketSans','Noto Sans KR',sans-serif;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    /* 상단바 */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    .back{
+      font-weight:700;
+      color:var(--green);
+    }
+
+    main{
+      padding:32px 0 56px;
+    }
+
+    /* 페이지 제목 */
+    .page-title{
+      text-align:center;
+      margin-bottom:28px;
+    }
+
+    .page-title h1{
+      margin:0;
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .page-title p{
+      margin-top:10px;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    /* 본당 정보 이미지 */
+    .about-info{
+      margin:32px 0 48px;
+    }
+
+    .about-info img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:var(--radius);
+    }
+
+    /* 기본은 모바일 */
+    .about-info-pc{display:none;}
+    .about-info-mobile{display:block;}
+
+    /* PC 화면 */
+    @media (min-width:768px){
+      .about-info-pc{display:block;}
+      .about-info-mobile{display:none;}
+    }
+
+    footer{
+      margin-top:48px;
+      text-align:center;
+      font-size:13px;
+      color:var(--muted);
+    }
   </style>
 </head>
+
 <body>
-  <header class="wrap">
-    <h1>본당소개 (About the Parish)</h1>
-    <div style="margin-top:8px;"><a href="./">← 메인으로</a></div>
-  </header>
+
+  <!-- 상단 -->
+  <div class="topbar">
+    <div class="wrap nav">
+      <a href="index.html" class="back">← 홈으로</a>
+    </div>
+  </div>
+
   <main class="wrap">
-    <h2>기본 정보</h2>
-    <p>주보성인: 아기 예수의 성녀 데레사<br>설립일: 2002.01.29.<br>주소: 경기도 수원시 영통구 인계로284번길 15</p>
-    <h2>사목 지향</h2>
-    <p>신앙과 친교, 봉사로 성장하는 지역 공동체를 지향합니다. (원하시는 소개문으로 자유롭게 교체하세요)</p>
+
+    <!-- 페이지 제목 -->
+    <div class="page-title">
+      <h1>본당소개</h1>
+      <p>수원교구 제1대리구 영통지구 매탄동본당</p>
+    </div>
+
+    <!-- 본당 기본 정보 이미지 -->
+    <section class="about-info">
+
+      <!-- PC용 -->
+      <img
+        src="about-info_pc.jpg"
+        alt="매탄동성당 본당 기본 정보"
+        class="about-info-pc"
+      >
+
+      <!-- 모바일용 -->
+      <img
+        src="about-info_mobile.jpg"
+        alt="매탄동성당 본당 기본 정보"
+        class="about-info-mobile"
+      >
+
+    </section>
+
+    <footer>
+      © <span id="y"></span> Maetan-dong Catholic Parish
+    </footer>
+
   </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
