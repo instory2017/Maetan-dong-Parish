@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>본당소개 | 매탄동성당</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
 
@@ -18,7 +17,6 @@
       --maxw:1100px;
       --radius:18px;
     }
-
     *{box-sizing:border-box}
     html,body{
       margin:0;padding:0;
@@ -34,62 +32,62 @@
       padding:0 16px;
     }
 
-    /* 상단 */
     .top{
       border-bottom:1px solid var(--line);
       padding:14px 0;
-      margin-bottom:24px;
+      margin-bottom:22px;
     }
     .back{
       font-size:14px;
       color:var(--green);
-      font-weight:700;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
 
-    /* 제목 */
     h1{
       text-align:center;
       font-size:22px;
-      margin:20px 0 6px;
+      margin:18px 0 6px;
       font-weight:900;
+      letter-spacing:-0.2px;
     }
     .subtitle{
       text-align:center;
       font-size:14px;
       color:var(--muted);
-      margin-bottom:32px;
+      margin:0 0 26px;
+      line-height:1.6;
     }
 
-    /* ===== PC / 모바일 이미지 분기 ===== */
-    .pc-only{display:none}
-    .mobile-only{display:block}
-
-    @media (min-width:701px){
-      .pc-only{display:block}
-      .mobile-only{display:none}
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 6px 18px rgba(17,24,39,.06);
     }
 
-    /* 이미지 공통 */
-    .about-image{
-      width:100%;
-      max-width:900px;
-      margin:0 auto 60px;
+    /* picture 안의 img는 1장만 렌더링됨 */
+    .hero-img{
       display:block;
+      width:100%;
+      height:auto;
     }
 
     footer{
       text-align:center;
       font-size:13px;
       color:var(--muted);
-      padding:30px 0 40px;
+      padding:28px 0 38px;
       border-top:1px solid var(--line);
+      margin-top:22px;
     }
   </style>
 </head>
 
 <body>
-
-  <!-- 상단 -->
   <div class="top">
     <div class="wrap">
       <a href="index.html" class="back">← 홈으로</a>
@@ -97,25 +95,17 @@
   </div>
 
   <main class="wrap">
-
-    <!-- 페이지 제목 -->
     <h1>본당소개</h1>
     <div class="subtitle">수원교구 제1대리구 영통지구 매탄동본당</div>
 
-    <!-- PC용 이미지 -->
-    <img
-      src="about-info_pc.jpg"
-      alt="매탄동성당 본당소개 정보"
-      class="about-image pc-only"
-    >
-
-    <!-- 모바일용 이미지 -->
-    <img
-      src="about-info_mobile.jpg"
-      alt="매탄동성당 본당소개 정보"
-      class="about-image mobile-only"
-    >
-
+    <div class="card">
+      <picture>
+        <!-- PC/태블릿(701px 이상) -->
+        <source media="(min-width: 701px)" srcset="about-info_pc.jpg">
+        <!-- 모바일 기본 -->
+        <img class="hero-img" src="about-info_mobile.jpg" alt="매탄동성당 본당소개 정보">
+      </picture>
+    </div>
   </main>
 
   <footer>
@@ -125,6 +115,5 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
