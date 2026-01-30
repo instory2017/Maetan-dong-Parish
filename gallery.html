@@ -1,37 +1,316 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>사진 | 매탄동성당</title>
-  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body{margin:0;font-family:'GmarketSans',sans-serif;color:#1e1e1e}
-    .wrap{max-width:960px;margin:0 auto;padding:24px 16px}
-    a{color:#1c3f39;text-decoration:none}
-    header{padding:14px 0;border-bottom:1px solid #e5e7eb;text-align:center}
-    h1{margin:0;font-size:22px}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
-    @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .ph{width:100%;aspect-ratio:4/3;background:#f2f4f7;border:1px solid #e5e7eb;border-radius:8px;
-        display:grid;place-items:center;color:#6b7280}
+    :root{
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --bg:#ffffff;
+      --card:#f9fafb;
+      --radius:14px;
+      --maxw:1080px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:18px 16px 40px}
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .top{
+      max-width:var(--maxw);margin:0 auto;
+      padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .title{
+      display:flex;flex-direction:column;gap:2px;
+    }
+    .title h1{margin:0;font-size:18px;letter-spacing:-.3px}
+    .title p{margin:0;font-size:12px;color:var(--muted)}
+    .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 12px;border:1px solid var(--line);
+      background:#fff;border-radius:999px;
+      font-size:13px;text-decoration:none;
+    }
+    .btn:hover{background:var(--card)}
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:12px;
+    }
+    @media (min-width:720px){
+      .grid{grid-template-columns: repeat(3, 1fr); gap:14px;}
+    }
+    @media (min-width:1020px){
+      .grid{grid-template-columns: repeat(4, 1fr); gap:14px;}
+    }
+
+    .item{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#fff;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .item:hover{transform: translateY(-2px); box-shadow: 0 10px 22px rgba(17,24,39,.08);}
+    .thumb{
+      width:100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display:block;
+      background:var(--card);
+    }
+    .cap{
+      padding:10px 10px 12px;
+      font-size:13px;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      background:linear-gradient(to bottom, #fff, #fafafa);
+    }
+
+    /* Lightbox */
+    .lb{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      background:rgba(0,0,0,.72);
+      z-index:999;
+      padding:16px;
+    }
+    .lb.open{display:flex;}
+    .lb-inner{
+      width:min(1100px, 100%);
+      max-height: calc(100vh - 80px);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .lb-bar{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      color:#fff;
+    }
+    .lb-bar .left{
+      font-size:13px; opacity:.9;
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .lb-bar .right{display:flex; gap:8px; align-items:center;}
+    .iconbtn{
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .iconbtn:hover{background:rgba(255,255,255,.16);}
+    .lb-imgwrap{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .lb-img{
+      width:100%;
+      height:auto;
+      max-height: calc(100vh - 160px);
+      object-fit: contain;
+      display:block;
+      background:transparent;
+    }
+
+    .navbtn{
+      position:absolute;
+      top:50%; transform:translateY(-50%);
+      padding:14px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.25);
+      color:#fff;
+      cursor:pointer;
+      user-select:none;
+    }
+    .navbtn:hover{background:rgba(0,0,0,.4);}
+    .navbtn.prev{left:12px;}
+    .navbtn.next{right:12px;}
+
+    footer{
+      margin-top:18px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
   </style>
 </head>
+
 <body>
-  <header class="wrap">
-    <h1>사진 (Photo Gallery)</h1>
-    <div style="margin-top:8px;"><a href="./">← 메인으로</a></div>
-  </header>
-  <main class="wrap">
-    <p>행사 사진을 여기에 추가하세요. (예: <code>/gallery/</code> 폴더에 이미지 업로드 후 아래 영역에 <code>&lt;img&gt;</code>로 배치)</p>
-    <div class="grid">
-      <div class="ph">이미지 자리</div>
-      <div class="ph">이미지 자리</div>
-      <div class="ph">이미지 자리</div>
-      <div class="ph">이미지 자리</div>
-      <div class="ph">이미지 자리</div>
-      <div class="ph">이미지 자리</div>
+  <header>
+    <div class="top">
+      <div class="title">
+        <h1>사진</h1>
+        <p>대표 사진 12장 (눌러서 크게 보기)</p>
+      </div>
+      <div class="btns">
+        <a class="btn" href="index.html">메인으로</a>
+        <a class="btn" href="about.html">본당소개</a>
+        <a class="btn" href="notice.html">공지사항</a>
+      </div>
     </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid" id="grid" aria-label="대표 사진 목록"></section>
+
+    <footer>© <span id="y"></span> Maetan-dong Catholic Parish</footer>
   </main>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lb" aria-hidden="true">
+    <div class="lb-inner">
+      <div class="lb-bar">
+        <div class="left">
+          <strong id="lbTitle">사진</strong>
+          <span id="lbCount" style="opacity:.85"></span>
+        </div>
+        <div class="right">
+          <button class="iconbtn" id="btnClose" type="button">닫기 ✕</button>
+        </div>
+      </div>
+
+      <div class="lb-imgwrap">
+        <img class="lb-img" id="lbImg" alt="확대 사진" />
+        <button class="navbtn prev" id="btnPrev" type="button" aria-label="이전 사진">‹</button>
+        <button class="navbtn next" id="btnNext" type="button" aria-label="다음 사진">›</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ 여기만 바꾸면 됨: 대표사진 12장 경로/캡션
+    const photos = [
+      { src: "assets/gallery/g01.jpg", cap: "대표사진 01" },
+      { src: "assets/gallery/g02.jpg", cap: "대표사진 02" },
+      { src: "assets/gallery/g03.jpg", cap: "대표사진 03" },
+      { src: "assets/gallery/g04.jpg", cap: "대표사진 04" },
+      { src: "assets/gallery/g05.jpg", cap: "대표사진 05" },
+      { src: "assets/gallery/g06.jpg", cap: "대표사진 06" },
+      { src: "assets/gallery/g07.jpg", cap: "대표사진 07" },
+      { src: "assets/gallery/g08.jpg", cap: "대표사진 08" },
+      { src: "assets/gallery/g09.jpg", cap: "대표사진 09" },
+      { src: "assets/gallery/g10.jpg", cap: "대표사진 10" },
+      { src: "assets/gallery/g11.jpg", cap: "대표사진 11" },
+      { src: "assets/gallery/g12.jpg", cap: "대표사진 12" },
+    ];
+
+    // Build grid
+    const grid = document.getElementById("grid");
+    photos.forEach((p, idx) => {
+      const card = document.createElement("article");
+      card.className = "item";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", p.cap + " 크게 보기");
+
+      const img = document.createElement("img");
+      img.className = "thumb";
+      img.loading = "lazy";
+      img.src = p.src;
+      img.alt = p.cap;
+
+      const cap = document.createElement("div");
+      cap.className = "cap";
+      cap.textContent = p.cap;
+
+      card.appendChild(img);
+      card.appendChild(cap);
+
+      const open = () => openLightbox(idx);
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+
+      grid.appendChild(card);
+    });
+
+    // Lightbox logic
+    const lb = document.getElementById("lb");
+    const lbImg = document.getElementById("lbImg");
+    const lbCount = document.getElementById("lbCount");
+    const btnClose = document.getElementById("btnClose");
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+
+    let cur = 0;
+
+    function render() {
+      const p = photos[cur];
+      lbImg.src = p.src;
+      lbCount.textContent = `(${cur + 1} / ${photos.length})`;
+    }
+
+    function openLightbox(index) {
+      cur = index;
+      render();
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      // 이미지 로딩 깜빡임 방지용
+      setTimeout(() => { lbImg.src = ""; }, 80);
+    }
+
+    function prev() {
+      cur = (cur - 1 + photos.length) % photos.length;
+      render();
+    }
+
+    function next() {
+      cur = (cur + 1) % photos.length;
+      render();
+    }
+
+    btnClose.addEventListener("click", closeLightbox);
+    btnPrev.addEventListener("click", prev);
+    btnNext.addEventListener("click", next);
+
+    // 배경 클릭하면 닫기
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    // 키보드
+    window.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    });
+
+    // Footer year
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
