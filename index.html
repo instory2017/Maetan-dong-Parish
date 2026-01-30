@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>매탄동성당 | Maetan-dong Catholic Parish</title>
 
-  <!-- Open Graph / Social Preview (필요하면 og:image만 네 최신 공유 이미지로 교체) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="매탄동성당">
   <meta property="og:locale" content="ko_KR">
@@ -13,9 +13,6 @@
   <meta property="og:description" content="본당소개 · 미사안내 · 사진 · 공지사항">
   <meta property="og:url" content="https://instory2017.github.io/Maetan-dong-Parish/">
   <meta property="og:image" content="https://instory2017.github.io/Maetan-dong-Parish/share-maetan-v2.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -31,256 +28,173 @@
       --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:'GmarketSans','Noto Sans KR',sans-serif}
+    html,body{
+      margin:0;padding:0;
+      background:#fff;
+      color:var(--ink);
+      font-family:'GmarketSans','Noto Sans KR',sans-serif
+    }
     a{color:inherit;text-decoration:none}
-
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
 
-    /* Top bar */
+    /* Top */
     .topbar{
-      position:sticky; top:0; z-index:50;
-      background:#fff;
-      border-bottom:1px solid var(--line);
+      position:sticky;top:0;z-index:50;
+      background:#fff;border-bottom:1px solid var(--line);
     }
     .nav{
       min-height:72px;
-      display:flex; align-items:center; justify-content:flex-end;
+      display:flex;justify-content:flex-end;align-items:center;
     }
     .btn-cafe{
-      display:inline-flex; align-items:center; justify-content:center;
-      color:var(--green);
-      text-decoration:none;
       border:2px solid var(--green);
       padding:10px 18px;
       border-radius:999px;
       font-weight:800;
-      white-space:nowrap;
-      background:#fff;
+      color:var(--green);
     }
     .btn-cafe:hover{background:var(--green);color:#fff}
 
-    /* Hero */
     main{padding:18px 0 28px}
+
+    /* Hero */
     .hero{
       border-radius:var(--radius);
       overflow:hidden;
       background:#f3f4f6;
-      box-shadow:0 1px 0 rgba(0,0,0,0.04);
+      box-shadow:0 1px 0 rgba(0,0,0,.04);
     }
-    .hero img{display:block;width:100%;height:auto}
+    .hero img{width:100%;display:block}
 
     .hero-desktop{display:none}
     .hero-mobile{display:block}
-    @media (min-width: 701px){
+    @media (min-width:701px){
       .hero-desktop{display:block}
       .hero-mobile{display:none}
     }
 
-    /* Quick links section */
+    /* Section title */
     .section-title{
-      margin:18px 0 10px;
+      margin:22px 0 10px;
       font-size:18px;
       font-weight:900;
-      letter-spacing:-0.2px;
     }
 
+    /* Quick links */
     .quick-grid{
       display:grid;
       gap:14px;
-      grid-template-columns:repeat(2, 1fr); /* 기본: PC/태블릿 2열 */
+      grid-template-columns:repeat(2,1fr);
     }
-
-    /* ✅ 모바일: 1열 4줄 */
-    @media (max-width: 700px){
-      .quick-grid{
-        grid-template-columns:1fr;
-      }
+    @media (max-width:700px){
+      .quick-grid{grid-template-columns:1fr}
     }
-
     .card{
       border:1px solid var(--line);
       border-radius:var(--radius);
       overflow:hidden;
       background:#fff;
-      box-shadow:0 6px 18px rgba(17,24,39,0.06);
-      transition:transform .08s ease, box-shadow .12s ease;
+      box-shadow:0 6px 18px rgba(17,24,39,.06);
     }
-    .card:hover{
-      transform:translateY(-1px);
-      box-shadow:0 10px 26px rgba(17,24,39,0.10);
+    .card img{width:100%;display:block}
+
+    /* Notice */
+    .notice-section{
+      margin:40px 0 24px;
     }
-    .card:active{transform:translateY(0)}
-    .card img{
-      display:block;
-      width:100%;
-      height:auto;
+    .notice-title{
+      font-size:18px;
+      font-weight:900;
+      margin-bottom:12px;
+      color:var(--green);
+    }
+    .notice-list{
+      list-style:none;
+      padding:0;margin:0;
+      border-top:1px solid var(--line);
+    }
+    .notice-list li{
+      padding:12px 4px;
+      border-bottom:1px solid var(--line);
+    }
+    .notice-item{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .notice-item .title{
+      font-weight:700;
+    }
+    .notice-item .meta{
+      font-size:13px;
+      color:var(--muted);
     }
 
-    /* Map section */
-    section{
-      margin-top:18px;
+    /* Map */
+    section.map{
+      margin-top:24px;
       border-top:1px solid var(--line);
       padding-top:18px;
     }
-    .muted{color:var(--muted)}
     .map-embed{
-      width:100%;
-      height:360px;
-      border:0;
-      border-radius:var(--radius);
-      background:#f3f4f6;
+      width:100%;height:360px;
+      border:0;border-radius:var(--radius);
     }
     .meta-row{
-      display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center;
-      justify-content:center;
-      margin-top:10px;
+      display:flex;gap:12px;flex-wrap:wrap;
+      justify-content:center;margin-top:10px;
     }
-
     footer{
       margin-top:18px;
       padding:18px 0 30px;
       text-align:center;
-      color:var(--muted);
       font-size:13px;
+      color:var(--muted);
     }
-    <style>
-  /* 기존 CSS들 전부 */
-
-  footer{
-    margin-top:18px;
-    padding:18px 0 30px;
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-  }
-
-  /* 👇 바로 이 아래에 붙여넣기 */
-  /* 공지사항 */
-  .notice-section{
-    margin:40px 0 24px;
-  }
-  .notice-title{
-    font-size:20px;
-    font-weight:800;
-    margin-bottom:12px;
-    color:#1c3f39;
-  }
-  .notice-list{
-    list-style:none;
-    padding:0;
-    margin:0;
-    border-top:1px solid #e5e7eb;
-  }
-  .notice-list li{
-    padding:12px 4px;
-    border-bottom:1px solid #e5e7eb;
-  }
-  .notice-item{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-  }
-  .notice-item .title{
-    font-weight:700;
-  }
-  .notice-item .meta{
-    font-size:13px;
-    color:#6b7280;
-  }
-</style>
-
   </style>
 </head>
 
 <body>
-  <!-- 헤더 -->
   <div class="topbar">
     <div class="wrap nav">
-      <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">
-        매탄동성당 커뮤니티
-      </a>
+      <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank">매탄동성당 커뮤니티</a>
     </div>
   </div>
 
-  <main class="wrap" aria-label="Main">
+  <main class="wrap">
 
-    <!-- 데스크톱 히어로 -->
-    <div class="hero hero-desktop" aria-label="메인 이미지(데스크톱)">
-      <img
-        src="maetan_v2.jpg"
-        alt="매탄동성당 메인(데스크톱)"
-        onerror="this.onerror=null; this.src='assets/maetan_v2.jpg';"
-      >
+    <!-- Hero -->
+    <div class="hero hero-desktop">
+      <img src="maetan_v2.jpg" alt="매탄동성당">
+    </div>
+    <div class="hero hero-mobile">
+      <img src="maetan-mobile_v2.jpg" alt="매탄동성당">
     </div>
 
-    <!-- 모바일 히어로 -->
-    <div class="hero hero-mobile" aria-label="메인 이미지(모바일)">
-      <img
-        src="maetan-mobile_v2.jpg"
-        alt="매탄동성당 메인(모바일)"
-        onerror="this.onerror=null; this.src='assets/maetan-mobile_v2.jpg';"
-      >
-    </div>
-
-    <!-- 바로가기 -->
+    <!-- Quick links -->
     <h2 class="section-title">바로가기</h2>
-    <div class="quick-grid" aria-label="바로가기 링크">
-      <a class="card" href="about.html" aria-label="본당소개">
-        <img
-          src="assets/link-about.jpg"
-          alt="본당소개"
-          onerror="this.onerror=null; this.src='link-about.jpg';"
-        >
-      </a>
-
-      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank" rel="noopener" aria-label="주보">
-        <img
-          src="assets/link-bulletin.jpg"
-          alt="매탄성당 주보"
-          onerror="this.onerror=null; this.src='link-bulletin.jpg';"
-        >
-      </a>
-
-      <a class="card" href="gallery.html" aria-label="사진">
-        <img
-          src="assets/link-gallery.jpg"
-          alt="사진"
-          onerror="this.onerror=null; this.src='link-gallery.jpg';"
-        >
-      </a>
-
-      <a class="card" href="notice.html" aria-label="공지사항">
-        <img
-          src="assets/link-notice.jpg"
-          alt="공지사항"
-          onerror="this.onerror=null; this.src='link-notice.jpg';"
-        >
-      </a>
+    <div class="quick-grid">
+      <a class="card" href="about.html"><img src="assets/link-about.jpg" alt="본당소개"></a>
+      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank"><img src="assets/link-bulletin.jpg" alt="주보"></a>
+      <a class="card" href="gallery.html"><img src="assets/link-gallery.jpg" alt="사진"></a>
+      <a class="card" href="notice.html"><img src="assets/link-notice.jpg" alt="공지사항"></a>
     </div>
 
-    <!-- 공지사항 -->
-<section class="notice-section">
-  <h2 class="notice-title">공지사항</h2>
-  <ul id="notice-list" class="notice-list">
-    <!-- notice.js에서 자동으로 채워짐 -->
-  </ul>
-</section>
+    <!-- Notice -->
+    <section class="notice-section">
+      <h2 class="notice-title">공지사항</h2>
+      <ul id="notice-list" class="notice-list"></ul>
+    </section>
 
-    <!-- 오시는 길 -->
-    <section aria-label="오시는 길">
-      <h2 class="section-title" style="margin-top:0">오시는 길</h2>
-      <iframe class="map-embed" loading="lazy" allowfullscreen
-        src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed">
+    <!-- Map -->
+    <section class="map">
+      <h2 class="section-title">오시는 길</h2>
+      <iframe class="map-embed" loading="lazy"
+        src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&z=16&output=embed">
       </iframe>
-
-      <p class="muted" style="margin:10px 0 0; text-align:center;">
-        주소: 경기도 수원시 영통구 인계로284번길 15 (매탄동 808)
-      </p>
-
       <div class="meta-row">
-        <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener">📍 구글지도에서 열기</a>
-        <span class="muted">|</span>
+        <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank">📍 지도 열기</a>
+        <span>|</span>
         <a href="tel:0312160573">☎ 031-216-0573</a>
       </div>
     </section>
@@ -291,21 +205,21 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
   <script src="notice.js"></script>
-<script>
-  const list = document.getElementById("notice-list");
-  if (window.NOTICES && NOTICES.text) {
-    NOTICES.text.slice(0,5).forEach(n => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <div class="notice-item">
-          <div class="title">${n.title}</div>
-          <div class="meta">${n.date} · ${n.body}</div>
-        </div>
-      `;
-      list.appendChild(li);
-    });
-  }
-</script>
+  <script>
+    const list = document.getElementById("notice-list");
+    if (window.NOTICES && NOTICES.text) {
+      NOTICES.text.slice(0,5).forEach(n=>{
+        const li=document.createElement("li");
+        li.innerHTML=`
+          <div class="notice-item">
+            <div class="title">${n.title}</div>
+            <div class="meta">${n.date} · ${n.body}</div>
+          </div>`;
+        list.appendChild(li);
+      });
+    }
+  </script>
 </body>
 </html>
