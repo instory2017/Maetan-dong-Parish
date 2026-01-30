@@ -1,208 +1,241 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>매탄동성당 | Maetan-dong Catholic Parish</title>
 
-  <!-- ✅ 미리보기(카톡/공유) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="매탄동성당" />
-  <meta property="og:locale" content="ko_KR" />
-  <meta property="og:title" content="천주교 수원교구 매탄동성당" />
-  <meta property="og:description" content="본당소개 · 미사안내 · 오시는길" />
-  <meta property="og:url" content="https://instory2017.github.io/Maetan-dong-Parish/" />
-  <meta property="og:image" content="https://instory2017.github.io/Maetan-dong-Parish/share-maetan-v2.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="천주교 수원교구 매탄동성당" />
-  <meta name="twitter:description" content="본당소개 · 미사안내 · 오시는길" />
-  <meta name="twitter:image" content="https://instory2017.github.io/Maetan-dong-Parish/share-maetan-v2.jpg" />
+  <!-- Open Graph / Social Preview (필요하면 og:image만 네 최신 공유 이미지로 교체) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="매탄동성당">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="천주교 수원교구 매탄동성당">
+  <meta property="og:description" content="본당소개 · 미사안내 · 사진 · 공지사항">
+  <meta property="og:url" content="https://instory2017.github.io/Maetan-dong-Parish/">
+  <meta property="og:image" content="https://instory2017.github.io/Maetan-dong-Parish/share-maetan-v2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
 
   <style>
     :root{
-      --ink:#1e1e1e;
+      --ink:#111827;
       --muted:#6b7280;
       --green:#1c3f39;
-      --bg:#ffffff;
-      --card:#ffffff;
       --line:#e5e7eb;
-      --maxw:980px;
-      --radius:14px;
+      --maxw:1100px;
+      --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'GmarketSans','Noto Sans KR',sans-serif}
-    body{line-height:1.65;font-weight:300;font-size:clamp(16px, 2.2vw, 18px)}
-    a{color:inherit}
+    html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:'GmarketSans','Noto Sans KR',sans-serif}
+    a{color:inherit;text-decoration:none}
+
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
 
-    /* 상단 바 */
+    /* Top bar */
     .topbar{
-      position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:saturate(180%) blur(8px);
+      position:sticky; top:0; z-index:50;
+      background:#fff;
       border-bottom:1px solid var(--line);
     }
     .nav{
-      height:76px;
-      display:flex;align-items:center;justify-content:flex-end;
-      gap:10px;
+      min-height:72px;
+      display:flex; align-items:center; justify-content:flex-end;
     }
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      border-radius:999px;
-      padding:10px 16px;
-      font-weight:700;
-      border:2px solid var(--green);
+    .btn-cafe{
+      display:inline-flex; align-items:center; justify-content:center;
       color:var(--green);
-      background:#fff;
+      text-decoration:none;
+      border:2px solid var(--green);
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
       white-space:nowrap;
-    }
-    .btn:hover{background:var(--green);color:#fff}
-
-    /* 히어로 이미지 */
-    .hero{margin:18px auto 18px}
-    .hero img{
-      display:block;width:100%;height:auto;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
       background:#fff;
     }
+    .btn-cafe:hover{background:var(--green);color:#fff}
+
+    /* Hero */
+    main{padding:18px 0 28px}
+    .hero{
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#f3f4f6;
+      box-shadow:0 1px 0 rgba(0,0,0,0.04);
+    }
+    .hero img{display:block;width:100%;height:auto}
+
     .hero-desktop{display:none}
     .hero-mobile{display:block}
-    @media (min-width: 760px){
+    @media (min-width: 701px){
       .hero-desktop{display:block}
       .hero-mobile{display:none}
     }
 
-    /* 링크 카드 */
+    /* Quick links section */
     .section-title{
-      margin:14px 0 10px;
-      font-weight:700;
-      color:var(--green);
-      font-size:1.05em;
+      margin:18px 0 10px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-0.2px;
     }
-    .grid{
+
+    .quick-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+      gap:14px;
+      grid-template-columns:repeat(2, 1fr); /* 기본: PC/태블릿 2열 */
     }
-    @media (min-width: 760px){
-      .grid{gap:16px}
+
+    /* ✅ 모바일: 1열 4줄 */
+    @media (max-width: 700px){
+      .quick-grid{
+        grid-template-columns:1fr;
+      }
     }
+
     .card{
-      display:block;
-      text-decoration:none;
-      background:var(--card);
       border:1px solid var(--line);
       border-radius:var(--radius);
       overflow:hidden;
-      transition:transform .12s ease, box-shadow .12s ease;
+      background:#fff;
+      box-shadow:0 6px 18px rgba(17,24,39,0.06);
+      transition:transform .08s ease, box-shadow .12s ease;
     }
     .card:hover{
       transform:translateY(-1px);
-      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      box-shadow:0 10px 26px rgba(17,24,39,0.10);
     }
-    .card img{display:block;width:100%;height:auto}
+    .card:active{transform:translateY(0)}
+    .card img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
 
-    /* 오시는 길 */
-    .visit{
-      margin:20px 0 18px;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:#fff;
+    /* Map section */
+    section{
+      margin-top:18px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
     }
+    .muted{color:var(--muted)}
     .map-embed{
       width:100%;
       height:360px;
       border:0;
-      border-radius:12px;
-      display:block;
+      border-radius:var(--radius);
+      background:#f3f4f6;
     }
-    .visit p{margin:10px 0 0}
-    .muted{color:var(--muted)}
-    .visit .row{
-      display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+    .meta-row{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
       margin-top:10px;
-    }
-    .visit .row a{
-      text-decoration:none;
-      border-bottom:1px solid rgba(28,63,57,.25);
     }
 
     footer{
+      margin-top:18px;
       padding:18px 0 30px;
       text-align:center;
       color:var(--muted);
-      font-size:.95em;
+      font-size:13px;
     }
   </style>
 </head>
 
 <body>
+  <!-- 헤더 -->
   <div class="topbar">
     <div class="wrap nav">
-      <a class="btn" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">매탄동성당 커뮤니티</a>
+      <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">
+        매탄동성당 커뮤니티
+      </a>
     </div>
   </div>
 
   <main class="wrap" aria-label="Main">
 
-    <!-- ✅ PC용(가로) -->
-    <div class="hero hero-desktop" aria-label="메인 이미지(PC)">
-      <!-- ?v=2 는 캐시 갱신용. 다음에 바꾸면 v=3처럼 숫자만 올리면 됨 -->
-      <img src="maetan_v2.jpg?v=2" alt="매탄동성당 메인(PC)" />
+    <!-- 데스크톱 히어로 -->
+    <div class="hero hero-desktop" aria-label="메인 이미지(데스크톱)">
+      <img
+        src="maetan_v2.jpg"
+        alt="매탄동성당 메인(데스크톱)"
+        onerror="this.onerror=null; this.src='assets/maetan_v2.jpg';"
+      >
     </div>
 
-    <!-- ✅ 모바일용(세로) -->
+    <!-- 모바일 히어로 -->
     <div class="hero hero-mobile" aria-label="메인 이미지(모바일)">
-      <img src="maetan-mobile_v2.jpg?v=2" alt="매탄동성당 메인(모바일)" />
+      <img
+        src="maetan-mobile_v2.jpg"
+        alt="매탄동성당 메인(모바일)"
+        onerror="this.onerror=null; this.src='assets/maetan-mobile_v2.jpg';"
+      >
     </div>
 
-    <div class="section-title">바로가기</div>
-    <div class="grid" aria-label="바로가기 링크 4개">
+    <!-- 바로가기 -->
+    <h2 class="section-title">바로가기</h2>
+    <div class="quick-grid" aria-label="바로가기 링크">
       <a class="card" href="about.html" aria-label="본당소개">
-        <img src="assets/link-about.jpg?v=2" alt="본당소개" />
+        <img
+          src="assets/link-about.jpg"
+          alt="본당소개"
+          onerror="this.onerror=null; this.src='link-about.jpg';"
+        >
       </a>
 
-      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank" rel="noopener" aria-label="매탄성당 주보">
-        <img src="assets/link-bulletin.jpg?v=2" alt="매탄성당 주보" />
+      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank" rel="noopener" aria-label="주보">
+        <img
+          src="assets/link-bulletin.jpg"
+          alt="매탄성당 주보"
+          onerror="this.onerror=null; this.src='link-bulletin.jpg';"
+        >
       </a>
 
       <a class="card" href="gallery.html" aria-label="사진">
-        <img src="assets/link-gallery.jpg?v=2" alt="사진" />
+        <img
+          src="assets/link-gallery.jpg"
+          alt="사진"
+          onerror="this.onerror=null; this.src='link-gallery.jpg';"
+        >
       </a>
 
-      <!-- 공지사항: 네가 실제 공지 페이지 파일을 만들면 notice.html로 바꿔줘 -->
       <a class="card" href="notice.html" aria-label="공지사항">
-        <img src="assets/link-notice.jpg?v=2" alt="공지사항" />
+        <img
+          src="assets/link-notice.jpg"
+          alt="공지사항"
+          onerror="this.onerror=null; this.src='link-notice.jpg';"
+        >
       </a>
     </div>
 
-    <section class="visit" aria-label="오시는 길">
-      <div class="section-title" style="margin-top:0">오시는 길</div>
+    <!-- 오시는 길 -->
+    <section aria-label="오시는 길">
+      <h2 class="section-title" style="margin-top:0">오시는 길</h2>
       <iframe class="map-embed" loading="lazy" allowfullscreen
         src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&t=&z=16&ie=UTF8&iwloc=&output=embed">
       </iframe>
 
-      <p class="muted">주소: 경기도 수원시 영통구 인계로284번길 15 (매탄동 808)</p>
-      <div class="row">
+      <p class="muted" style="margin:10px 0 0; text-align:center;">
+        주소: 경기도 수원시 영통구 인계로284번길 15 (매탄동 808)
+      </p>
+
+      <div class="meta-row">
         <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener">📍 구글지도에서 열기</a>
         <span class="muted">|</span>
         <a href="tel:0312160573">☎ 031-216-0573</a>
       </div>
     </section>
+
+    <footer>© <span id="y"></span> Maetan-dong Catholic Parish</footer>
   </main>
 
-  <footer>© <span id="y"></span> Maetan-dong Catholic Parish</footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
