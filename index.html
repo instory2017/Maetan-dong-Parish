@@ -207,19 +207,21 @@
   </script>
 
   <script src="notice.js"></script>
-  <script>
-    const list = document.getElementById("notice-list");
-    if (window.NOTICES && NOTICES.text) {
-      NOTICES.text.slice(0,5).forEach(n=>{
-        const li=document.createElement("li");
-        li.innerHTML=`
-          <div class="notice-item">
-            <div class="title">${n.title}</div>
-            <div class="meta">${n.date} · ${n.body}</div>
-          </div>`;
-        list.appendChild(li);
-      });
-    }
-  </script>
+<script src="notice.js"></script>
+<script>
+  const list = document.getElementById("notice-list");
+  if (window.NOTICES && NOTICES.text) {
+    NOTICES.text.slice(0,5).forEach(n=>{
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="notice.html" class="notice-item">
+          <div class="title">${n.title}</div>
+          <div class="meta">${n.date} · ${n.body}</div>
+        </a>
+      `;
+      list.appendChild(li);
+    });
+  }
+</script>
 </body>
 </html>
