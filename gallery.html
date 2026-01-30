@@ -27,20 +27,19 @@
       border-bottom:1px solid var(--line);
     }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
-    .nav{
-      min-height:64px;display:flex;align-items:center;justify-content:space-between;
-    }
-    .brand{font-weight:800;color:var(--green);}
+    .nav{min-height:64px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--green)}
     .back{
       padding:10px 14px;border-radius:999px;border:1px solid var(--line);
       font-weight:700;
     }
+    .back:hover{background:#f9fafb}
 
     header{padding:22px 0 10px}
     h1{margin:0;font-size:22px}
-    .sub{margin-top:8px;color:var(--muted);font-size:14px}
+    .sub{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6}
 
-    /* 사진 그리드 */
+    /* 그리드 */
     .grid{
       display:grid;
       gap:10px;
@@ -48,24 +47,111 @@
       grid-template-columns:repeat(2, 1fr);
     }
     @media (min-width:700px){
-      .grid{grid-template-columns:repeat(3, 1fr);}
+      .grid{grid-template-columns:repeat(3, 1fr); gap:12px;}
     }
     @media (min-width:1024px){
-      .grid{grid-template-columns:repeat(4, 1fr);}
+      .grid{grid-template-columns:repeat(4, 1fr); gap:14px;}
     }
 
+    /* 썸네일 카드 */
     .ph{
       background:var(--soft);
       border-radius:var(--radius);
       overflow:hidden;
       border:1px solid rgba(0,0,0,0.04);
     }
-    .ph img{
+
+    .thumb{
+      display:block;
+      cursor:zoom-in;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .thumb img{
       display:block;
       width:100%;
       aspect-ratio:4 / 3;
       object-fit:cover;
+      transform:translateZ(0);
     }
+
+    .thumb:focus-visible{
+      outline:3px solid rgba(28,63,57,.35);
+      outline-offset:2px;
+      border-radius:var(--radius);
+    }
+
+    /* 라이트박스 */
+    .lightbox{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.88);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:14px;
+    }
+    .lightbox.open{display:flex}
+
+    .lb-inner{
+      width:min(980px, 100%);
+      height:min(80vh, 720px);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .lb-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:#fff;
+      font-size:14px;
+      opacity:.95;
+      user-select:none;
+    }
+    .lb-top .hint{opacity:.8}
+    .lb-btn{
+      appearance:none;border:0;background:rgba(255,255,255,.12);
+      color:#fff;padding:10px 12px;border-radius:10px;
+      font-weight:700;cursor:pointer;
+    }
+    .lb-btn:active{transform:scale(.98)}
+
+    .lb-stage{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      border-radius:14px;
+      position:relative;
+    }
+
+    .lb-img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;height:auto;
+      border-radius:14px;
+      user-select:none;
+      -webkit-user-drag:none;
+      background:#111;
+    }
+
+    /* 좌우 버튼 (PC에서 유용) */
+    .navbtn{
+      position:absolute;top:50%;
+      transform:translateY(-50%);
+      width:44px;height:44px;border-radius:999px;
+      border:0;background:rgba(255,255,255,.14);
+      color:#fff;font-size:22px;cursor:pointer;
+      display:none;
+    }
+    @media (min-width:700px){
+      .navbtn{display:block;}
+    }
+    .prev{left:10px}
+    .next{right:10px}
 
     footer{
       padding:18px 0 30px;
@@ -88,17 +174,37 @@
   <main class="wrap">
     <header>
       <h1>사진</h1>
-      <p class="sub">본당의 소중한 순간들</p>
+      <p class="sub">사진을 누르면 크게 볼 수 있어요.</p>
     </header>
 
     <section class="grid" id="grid"></section>
   </main>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-inner" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+      <div class="lb-top">
+        <div class="hint" id="lbCounter">1 / 12</div>
+        <div style="display:flex; gap:8px;">
+          <button class="lb-btn" id="lbDownload" type="button">이미지 열기</button>
+          <button class="lb-btn" id="lbClose" type="button">닫기 ✕</button>
+        </div>
+      </div>
+
+      <div class="lb-stage" id="lbStage">
+        <button class="navbtn prev" id="lbPrev" aria-label="이전">‹</button>
+        <img class="lb-img" id="lbImg" alt="확대 이미지" />
+        <button class="navbtn next" id="lbNext" aria-label="다음">›</button>
+      </div>
+    </div>
+  </div>
 
   <footer>© <span id="y"></span> Maetan-dong Catholic Parish</footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
+    // ✅ 사진 파일명 (assets/gallery 폴더)
     const basePath = "assets/gallery/";
     const files = [
       "g01.jpg","g02.jpg","g03.jpg","g04.jpg","g05.jpg","g06.jpg",
@@ -107,20 +213,117 @@
 
     const grid = document.getElementById("grid");
 
-    files.forEach(name => {
-      const box = document.createElement("div");
-      box.className = "ph";
+    // 라이트박스 요소
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    const lbCounter = document.getElementById("lbCounter");
+    const lbDownload = document.getElementById("lbDownload");
+    const lbStage = document.getElementById("lbStage");
+
+    let currentIndex = 0;
+
+    function openLightbox(idx){
+      currentIndex = idx;
+      const src = basePath + files[currentIndex] + "?v=2";
+
+      lbImg.src = src;
+      lbCounter.textContent = (currentIndex + 1) + " / " + files.length;
+
+      // "이미지 열기" 버튼: 새 탭에서 원본 열어 저장/공유하기 쉽게
+      lbDownload.onclick = () => {
+        window.open(basePath + files[currentIndex], "_blank", "noopener");
+      };
+
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+
+      // 스크롤 잠금
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox(){
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    function showPrev(){
+      currentIndex = (currentIndex - 1 + files.length) % files.length;
+      openLightbox(currentIndex);
+    }
+
+    function showNext(){
+      currentIndex = (currentIndex + 1) % files.length;
+      openLightbox(currentIndex);
+    }
+
+    // 썸네일 생성
+    files.forEach((name, idx) => {
+      const card = document.createElement("div");
+      card.className = "ph";
+
+      const a = document.createElement("a");
+      a.className = "thumb";
+      a.href = basePath + name;
+      a.setAttribute("aria-label", "사진 크게 보기");
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox(idx);
+      });
 
       const img = document.createElement("img");
       img.src = basePath + name + "?v=2";
       img.alt = "매탄동성당 사진";
       img.loading = "lazy";
+      img.onerror = () => card.remove();
 
-      img.onerror = () => box.remove();
-
-      box.appendChild(img);
-      grid.appendChild(box);
+      a.appendChild(img);
+      card.appendChild(a);
+      grid.appendChild(card);
     });
+
+    // 닫기 동작
+    lbClose.addEventListener("click", closeLightbox);
+
+    // 배경 클릭 시 닫기 (이미지/버튼 영역 제외)
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    // 좌우 버튼
+    lbPrev.addEventListener("click", showPrev);
+    lbNext.addEventListener("click", showNext);
+
+    // 키보드 지원 (PC)
+    window.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+    });
+
+    // 모바일 스와이프 지원
+    let startX = null;
+    lbStage.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    }, {passive:true});
+
+    lbStage.addEventListener("touchend", (e) => {
+      if (startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+      startX = null;
+
+      // 너무 짧은 스와이프는 무시
+      if (Math.abs(diff) < 40) return;
+
+      if (diff > 0) showPrev();
+      else showNext();
+    }, {passive:true});
   </script>
 </body>
 </html>
