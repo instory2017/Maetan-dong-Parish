@@ -179,6 +179,16 @@
       font-size:13px;
       color:var(--muted);
     }
+    /* iOS Safari 전용 스타일 */
+@supports (-webkit-touch-callout: none) {
+
+  /* 상단 커뮤니티 버튼 크기 조정 */
+  .btn-cafe{
+    padding: 8px 14px;   /* 기존 10px 18px → 축소 */
+    font-size: 14px;     /* 살짝 작게 */
+  }
+
+}
   </style>
 </head>
 
