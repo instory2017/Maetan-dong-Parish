@@ -1,1 +1,23 @@
+{
+  "name": "매탄동성당",
+  "short_name": "매탄동성당",
+  "start_url": "./?source=a2hs",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1c3f39",
+  "icons": [
+    {
+      "src": "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
 
