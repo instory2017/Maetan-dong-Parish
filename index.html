@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>매탄동성당 | Maetan-dong Catholic Parish</title>
 
   <!-- Open Graph -->
@@ -18,6 +18,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
 
+  <!-- PWA / App-like -->
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <!-- iOS 홈화면 아이콘 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
+
+  <!-- (선택) 일반 브라우저 탭 아이콘 -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+
+  <!-- iOS에서 앱처럼 보이게 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- default / black / black-translucent -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="매탄동성당">
+
+  <!-- Android 주소창/상단 색 -->
+  <meta name="theme-color" content="#1c3f39">
+
   <style>
     :root{
       --ink:#111827;
@@ -32,7 +51,7 @@
       margin:0;padding:0;
       background:#fff;
       color:var(--ink);
-      font-family:'GmarketSans','Noto Sans KR',sans-serif
+      font-family:'GmarketSans','Noto Sans KR',sans-serif;
     }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
@@ -41,6 +60,8 @@
     .topbar{
       position:sticky;top:0;z-index:50;
       background:#fff;border-bottom:1px solid var(--line);
+      /* iOS 홈화면에서 상단 안전영역 대응 */
+      padding-top: env(safe-area-inset-top);
     }
     .nav{
       min-height:72px;
@@ -52,6 +73,7 @@
       border-radius:999px;
       font-weight:800;
       color:var(--green);
+      background:#fff;
     }
     .btn-cafe:hover{background:var(--green);color:#fff}
 
@@ -95,7 +117,13 @@
       overflow:hidden;
       background:#fff;
       box-shadow:0 6px 18px rgba(17,24,39,.06);
+      transition:transform .08s ease, box-shadow .12s ease;
     }
+    .card:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(17,24,39,.10);
+    }
+    .card:active{transform:translateY(0)}
     .card img{width:100%;display:block}
 
     /* Notice */
@@ -122,12 +150,11 @@
       flex-direction:column;
       gap:4px;
     }
-    .notice-item .title{
-      font-weight:700;
-    }
+    .notice-item .title{font-weight:700}
     .notice-item .meta{
       font-size:13px;
       color:var(--muted);
+      line-height:1.45;
     }
 
     /* Map */
@@ -143,29 +170,24 @@
     .meta-row{
       display:flex;gap:12px;flex-wrap:wrap;
       justify-content:center;margin-top:10px;
+      color:var(--muted);
     }
     footer{
       margin-top:18px;
-      padding:18px 0 30px;
+      padding:18px 0 calc(30px + env(safe-area-inset-bottom));
       text-align:center;
       font-size:13px;
       color:var(--muted);
     }
   </style>
-<link rel="manifest" href="./manifest.webmanifest">
-
-<link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#1c3f39">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="매탄동성당">
-
 </head>
 
 <body>
   <div class="topbar">
     <div class="wrap nav">
-      <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank">매탄동성당 커뮤니티</a>
+      <a class="btn-cafe" href="https://cafe.daum.net/maetancathoric" target="_blank" rel="noopener">
+        매탄동성당 커뮤니티
+      </a>
     </div>
   </div>
 
@@ -183,7 +205,7 @@
     <h2 class="section-title">바로가기</h2>
     <div class="quick-grid">
       <a class="card" href="about.html"><img src="assets/link-about.jpg" alt="본당소개"></a>
-      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank"><img src="assets/link-bulletin.jpg" alt="주보"></a>
+      <a class="card" href="https://cafe.daum.net/maetancathoric/SrXP" target="_blank" rel="noopener"><img src="assets/link-bulletin.jpg" alt="주보"></a>
       <a class="card" href="gallery.html"><img src="assets/link-gallery.jpg" alt="사진"></a>
       <a class="card" href="notice.html"><img src="assets/link-notice.jpg" alt="공지사항"></a>
     </div>
@@ -201,7 +223,7 @@
         src="https://maps.google.com/maps?q=%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%98%81%ED%86%B5%EA%B5%AC%20%EC%9D%B8%EA%B3%84%EB%A1%9C284%EB%B2%88%EA%B8%B8%2015&z=16&output=embed">
       </iframe>
       <div class="meta-row">
-        <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank">📍 지도 열기</a>
+        <a href="https://maps.app.goo.gl/GSTps9fxypb5iByp7" target="_blank" rel="noopener">📍 지도 열기</a>
         <span>|</span>
         <a href="tel:0312160573">☎ 031-216-0573</a>
       </div>
@@ -213,21 +235,34 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
+  <!-- 공지 데이터 -->
   <script src="notice.js"></script>
-<script>
-  const list = document.getElementById("notice-list");
-  if (window.NOTICES && NOTICES.text) {
-    NOTICES.text.slice(0,5).forEach(n=>{
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <a href="./notice.html" class="notice-item">
-          <div class="title">${n.title}</div>
-          <div class="meta">${n.date} · ${n.body}</div>
-        </a>
-      `;
-      list.appendChild(li);
-    });
-  }
-</script>
+
+  <!-- 홈 공지 5개 렌더 -->
+  <script>
+    const list = document.getElementById("notice-list");
+    if (window.NOTICES && Array.isArray(NOTICES.text)) {
+      NOTICES.text.slice(0,5).forEach(n=>{
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <a href="./notice.html" class="notice-item">
+            <div class="title">${n.title}</div>
+            <div class="meta">${n.date} · ${n.body}</div>
+          </a>
+        `;
+        list.appendChild(li);
+      });
+    }
+  </script>
+
+  <!-- (앱 느낌 업그레이드) Service Worker 등록 -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(()=>{});
+      });
+    }
+  </script>
 </body>
 </html>
