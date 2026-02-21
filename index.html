@@ -18,23 +18,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
 
-  <!-- PWA / App-like -->
+  <!-- PWA -->
   <link rel="manifest" href="./manifest.webmanifest">
-
-  <!-- iOS 홈화면 아이콘 -->
   <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
-
-  <!-- (선택) 일반 브라우저 탭 아이콘 -->
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 
-  <!-- iOS에서 앱처럼 보이게 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <!-- default / black / black-translucent -->
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="매탄동성당">
-
-  <!-- Android 주소창/상단 색 -->
   <meta name="theme-color" content="#1c3f39">
 
   <style>
@@ -56,11 +48,9 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
 
-    /* Top */
     .topbar{
       position:sticky;top:0;z-index:50;
       background:#fff;border-bottom:1px solid var(--line);
-      /* iOS 홈화면에서 상단 안전영역 대응 */
       padding-top: env(safe-area-inset-top);
     }
     .nav{
@@ -95,9 +85,8 @@
       .hero-mobile{display:none}
     }
 
-    /* Section title */
     .section-title{
-      margin:22px 0 10px;
+      margin:28px 0 14px;
       font-size:18px;
       font-weight:900;
     }
@@ -123,43 +112,30 @@
       transform:translateY(-1px);
       box-shadow:0 10px 26px rgba(17,24,39,.10);
     }
-    .card:active{transform:translateY(0)}
     .card img{width:100%;display:block}
 
-    /* Notice */
-    .notice-section{
-      margin:40px 0 24px;
+    /* Prayer Section */
+    .prayer-section{
+      margin:50px 0 10px;
     }
-    .notice-title{
-      font-size:18px;
-      font-weight:900;
-      margin-bottom:12px;
-      color:var(--green);
+    .prayer-box{
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(0,0,0,.06);
     }
-    .notice-list{
-      list-style:none;
-      padding:0;margin:0;
-      border-top:1px solid var(--line);
+    .prayer-box img{
+      width:100%;
+      display:block;
     }
-    .notice-list li{
-      padding:12px 4px;
-      border-bottom:1px solid var(--line);
-    }
-    .notice-item{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-    .notice-item .title{font-weight:700}
-    .notice-item .meta{
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.45;
+    .prayer-desktop{display:none}
+    .prayer-mobile{display:block}
+    @media (min-width:701px){
+      .prayer-desktop{display:block}
+      .prayer-mobile{display:none}
     }
 
-    /* Map */
     section.map{
-      margin-top:24px;
+      margin-top:40px;
       border-top:1px solid var(--line);
       padding-top:18px;
     }
@@ -179,16 +155,6 @@
       font-size:13px;
       color:var(--muted);
     }
-    /* iOS Safari 전용 스타일 */
-@supports (-webkit-touch-callout: none) {
-
-  /* 상단 커뮤니티 버튼 크기 조정 */
-  .btn-cafe{
-    padding: 8px 14px;   /* 기존 10px 18px → 축소 */
-    font-size: 14px;     /* 살짝 작게 */
-  }
-
-}
   </style>
 </head>
 
@@ -220,10 +186,17 @@
       <a class="card" href="notice.html"><img src="assets/link-notice.jpg" alt="공지사항"></a>
     </div>
 
-    <!-- Notice -->
-    <section class="notice-section">
-      <h2 class="notice-title">공지사항</h2>
-      <ul id="notice-list" class="notice-list"></ul>
+    <!-- Prayer Section -->
+    <section class="prayer-section">
+      <h2 class="section-title">매탄동성당 25주년 기도문</h2>
+
+      <div class="prayer-box prayer-desktop">
+        <img src="assets/maetan-prayer-2025_PC.jpg" alt="매탄동성당 25주년 기도문">
+      </div>
+
+      <div class="prayer-box prayer-mobile">
+        <img src="assets/maetan-prayer-2025_mobile.jpg" alt="매탄동성당 25주년 기도문">
+      </div>
     </section>
 
     <!-- Map -->
@@ -246,33 +219,5 @@
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 
-  <!-- 공지 데이터 -->
-  <script src="notice.js"></script>
-
-  <!-- 홈 공지 5개 렌더 -->
-  <script>
-    const list = document.getElementById("notice-list");
-    if (window.NOTICES && Array.isArray(NOTICES.text)) {
-      NOTICES.text.slice(0,5).forEach(n=>{
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <a href="./notice.html" class="notice-item">
-            <div class="title">${n.title}</div>
-            <div class="meta">${n.date} · ${n.body}</div>
-          </a>
-        `;
-        list.appendChild(li);
-      });
-    }
-  </script>
-
-  <!-- (앱 느낌 업그레이드) Service Worker 등록 -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js").catch(()=>{});
-      });
-    }
-  </script>
 </body>
 </html>
