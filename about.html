@@ -17,14 +17,21 @@
       --maxw:1100px;
       --radius:18px;
     }
+
     *{box-sizing:border-box}
+
     html,body{
-      margin:0;padding:0;
+      margin:0;
+      padding:0;
       background:#fff;
       color:var(--ink);
       font-family:'GmarketSans','Noto Sans KR',sans-serif;
     }
-    a{color:inherit;text-decoration:none}
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
     .wrap{
       max-width:var(--maxw);
@@ -32,33 +39,55 @@
       padding:0 16px;
     }
 
-    .top{
+    /* ✅ 상단 통일 구조 */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
       border-bottom:1px solid var(--line);
-      padding:14px 0;
-      margin-bottom:22px;
     }
-    .back{
-      font-size:14px;
-      color:var(--green);
-      font-weight:800;
-      display:inline-flex;
+
+    .nav{
+      min-height:64px;
+      display:flex;
       align-items:center;
-      gap:8px;
+      justify-content:space-between;
+    }
+
+    .brand{
+      font-weight:800;
+      font-size:18px;
+      color:var(--green);
+      letter-spacing:-0.3px;
+    }
+
+    .home-btn{
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-weight:700;
+      font-size:14px;
+      background:#fff;
+      transition:all .2s ease;
+    }
+
+    .home-btn:hover{
+      background:#f9fafb;
+    }
+
+    /* 콘텐츠 영역 */
+
+    main{
+      padding:28px 0;
     }
 
     h1{
       text-align:center;
       font-size:22px;
-      margin:18px 0 6px;
+      margin:10px 0 26px;
       font-weight:900;
       letter-spacing:-0.2px;
-    }
-    .subtitle{
-      text-align:center;
-      font-size:14px;
-      color:var(--muted);
-      margin:0 0 26px;
-      line-height:1.6;
     }
 
     .card{
@@ -69,7 +98,6 @@
       box-shadow:0 6px 18px rgba(17,24,39,.06);
     }
 
-    /* picture 안의 img는 1장만 렌더링됨 */
     .hero-img{
       display:block;
       width:100%;
@@ -82,26 +110,29 @@
       color:var(--muted);
       padding:28px 0 38px;
       border-top:1px solid var(--line);
-      margin-top:22px;
+      margin-top:40px;
     }
   </style>
 </head>
 
 <body>
-<div class="topbar">
-  <div class="wrap nav">
-    <div class="brand">매탄동성당</div>
-    <a class="back" href="index.html">← 홈으로</a>
+
+  <!-- ✅ 통일된 상단 -->
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="brand">매탄동성당</div>
+      <a class="home-btn" href="index.html">← 홈으로</a>
     </div>
   </div>
 
   <main class="wrap">
     <h1>본당소개</h1>
+
     <div class="card">
       <picture>
-        <!-- PC/태블릿(701px 이상) -->
+        <!-- PC/태블릿 -->
         <source media="(min-width: 701px)" srcset="about-info_pc.jpg">
-        <!-- 모바일 기본 -->
+        <!-- 모바일 -->
         <img class="hero-img" src="about-info_mobile.jpg" alt="매탄동성당 본당소개 정보">
       </picture>
     </div>
@@ -114,5 +145,6 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
