@@ -310,24 +310,49 @@
       if (e.key === "ArrowRight") showNext();
     });
 
-    // 모바일 스와이프 지원
-    let startX = null;
-    lbStage.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    }, {passive:true});
+  // ✅ 모바일 스와이프 지원 (핀치 줌 시에는 넘김 방지)
+  let startX = null;
+  let isPinching = false;
 
-    lbStage.addEventListener("touchend", (e) => {
-      if (startX === null) return;
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
+  lbStage.addEventListener("touchstart", (e) => {
+    // 두 손가락 이상이면 스와이프 시작 자체를 막음
+    if (e.touches.length > 1) {
+      isPinching = true;
       startX = null;
+      return;
+    }
+    isPinching = false;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
 
-      // 너무 짧은 스와이프는 무시
-      if (Math.abs(diff) < 40) return;
+  lbStage.addEventListener("touchmove", (e) => {
+    // 이동 중에 두 손가락이 감지되면 핀치로 판단
+    if (e.touches.length > 1) {
+      isPinching = true;
+      startX = null;
+    }
+  }, { passive: true });
 
-      if (diff > 0) showPrev();
-      else showNext();
-    }, {passive:true});
-  </script>
+  lbStage.addEventListener("touchend", (e) => {
+    // 핀치(멀티터치)였다면 사진 넘김을 하지 않음
+    if (isPinching) {
+      isPinching = false;
+      startX = null;
+      return;
+    }
+
+    if (startX === null) return;
+
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+    startX = null;
+
+    // 너무 짧은 스와이프는 무시
+    if (Math.abs(diff) < 40) return;
+
+    if (diff > 0) showPrev();
+    else showNext();
+  }, { passive: true });
+</script>
 </body>
 </html>
