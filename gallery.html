@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>사진 | 매탄동성당</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+  <!-- Fonts (다른 페이지들과 통일) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet"/>
 
   <style>
     :root{
@@ -18,7 +20,10 @@
       --soft:#f3f4f6;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:'GmarketSans','Noto Sans KR',sans-serif}
+    html,body{
+      margin:0;padding:0;background:#fff;color:var(--ink);
+      font-family:'GmarketSans','Noto Sans KR',sans-serif;
+    }
     a{color:inherit;text-decoration:none}
 
     .topbar{
@@ -27,20 +32,29 @@
     }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
     .nav{min-height:64px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800;color:var(--green)}
+
+    /* ✅ "매탄동성당"만 얇게 */
+    .brand{
+      font-weight:300;
+      color:var(--green);
+      letter-spacing:-0.2px;
+    }
+
     .back{
       padding:10px 14px;border-radius:999px;border:1px solid var(--line);
-      font-weight:700;
+      font-weight:700;background:#fff;
     }
     .back:hover{background:#f9fafb}
 
     header{padding:22px 0 10px}
+
+    /* ✅ 페이지 타이틀은 굵게 유지 */
     h1{
-  margin:0;
-  font-size:22px;
-  font-weight:800;   /* 다시 굵게 */
-  letter-spacing:-0.2px;
-}
+      margin:0;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-0.2px;
+    }
     .sub{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6}
 
     /* 그리드 */
@@ -208,7 +222,6 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // ✅ 사진 파일명 (assets/gallery 폴더)
     const basePath = "assets/gallery/";
     const files = [
       "g01.jpg","g02.jpg","g03.jpg","g04.jpg","g05.jpg","g06.jpg",
@@ -217,7 +230,6 @@
 
     const grid = document.getElementById("grid");
 
-    // 라이트박스 요소
     const lb = document.getElementById("lightbox");
     const lbImg = document.getElementById("lbImg");
     const lbClose = document.getElementById("lbClose");
@@ -236,15 +248,12 @@
       lbImg.src = src;
       lbCounter.textContent = (currentIndex + 1) + " / " + files.length;
 
-      // "이미지 열기" 버튼: 새 탭에서 원본 열어 저장/공유하기 쉽게
       lbDownload.onclick = () => {
         window.open(basePath + files[currentIndex], "_blank", "noopener");
       };
 
       lb.classList.add("open");
       lb.setAttribute("aria-hidden", "false");
-
-      // 스크롤 잠금
       document.body.style.overflow = "hidden";
     }
 
@@ -265,7 +274,6 @@
       openLightbox(currentIndex);
     }
 
-    // 썸네일 생성
     files.forEach((name, idx) => {
       const card = document.createElement("div");
       card.className = "ph";
@@ -290,19 +298,15 @@
       grid.appendChild(card);
     });
 
-    // 닫기 동작
     lbClose.addEventListener("click", closeLightbox);
 
-    // 배경 클릭 시 닫기 (이미지/버튼 영역 제외)
     lb.addEventListener("click", (e) => {
       if (e.target === lb) closeLightbox();
     });
 
-    // 좌우 버튼
     lbPrev.addEventListener("click", showPrev);
     lbNext.addEventListener("click", showNext);
 
-    // 키보드 지원 (PC)
     window.addEventListener("keydown", (e) => {
       if (!lb.classList.contains("open")) return;
       if (e.key === "Escape") closeLightbox();
@@ -310,49 +314,44 @@
       if (e.key === "ArrowRight") showNext();
     });
 
-  // ✅ 모바일 스와이프 지원 (핀치 줌 시에는 넘김 방지)
-  let startX = null;
-  let isPinching = false;
+    // ✅ 모바일 스와이프 지원 (핀치 줌 시에는 넘김 방지)
+    let startX = null;
+    let isPinching = false;
 
-  lbStage.addEventListener("touchstart", (e) => {
-    // 두 손가락 이상이면 스와이프 시작 자체를 막음
-    if (e.touches.length > 1) {
-      isPinching = true;
-      startX = null;
-      return;
-    }
-    isPinching = false;
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-
-  lbStage.addEventListener("touchmove", (e) => {
-    // 이동 중에 두 손가락이 감지되면 핀치로 판단
-    if (e.touches.length > 1) {
-      isPinching = true;
-      startX = null;
-    }
-  }, { passive: true });
-
-  lbStage.addEventListener("touchend", (e) => {
-    // 핀치(멀티터치)였다면 사진 넘김을 하지 않음
-    if (isPinching) {
+    lbStage.addEventListener("touchstart", (e) => {
+      if (e.touches.length > 1) {
+        isPinching = true;
+        startX = null;
+        return;
+      }
       isPinching = false;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    lbStage.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 1) {
+        isPinching = true;
+        startX = null;
+      }
+    }, { passive: true });
+
+    lbStage.addEventListener("touchend", (e) => {
+      if (isPinching) {
+        isPinching = false;
+        startX = null;
+        return;
+      }
+      if (startX === null) return;
+
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
       startX = null;
-      return;
-    }
 
-    if (startX === null) return;
+      if (Math.abs(diff) < 40) return;
 
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-    startX = null;
-
-    // 너무 짧은 스와이프는 무시
-    if (Math.abs(diff) < 40) return;
-
-    if (diff > 0) showPrev();
-    else showNext();
-  }, { passive: true });
-</script>
+      if (diff > 0) showPrev();
+      else showNext();
+    }, { passive: true });
+  </script>
 </body>
 </html>
